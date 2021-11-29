@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{%block title %} Add Crime {%endblock title%}
+
+
+{%block body%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-2">
+            <form id="regForm" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <h3 class="text-center">Add New Record</h3>
+                
+                <!-- One "tab" for each step in the form: -->
+                <div class="tab">Name:
+                  <p><input type="text" name="fname" placeholder="First name..." class="form-control" oninput="this.className = ''"></p>
+                  <p><input type="text" name="lname" placeholder="Last name..." class="form-control" oninput="this.className = ''"></p>
+                  <p><input type="email" name="email" required placeholder="E-mail..." class="form-control" oninput="this.className = ''"></p>
+                  <p><input type="phone" name="phone" placeholder="Phone..." class="form-control" oninput="this.className = ''"></p>
+                </div>
+                
+                <div class="tab">
+                    <p><input type="text" name="pin" id="pin" onchange="myfun()" placeholder="Zip Code..." class="form-control" oninput="this.className = ''"></p>
+                    <p><input type="text" name="address" id="district" placeholder="District..." class="form-control" oninput="this.className = ''"></p>
+                    <p><input type="text" name="country" id="country" placeholder="Country..." class="form-control" oninput="this.className = ''"></p>
+                    <div class="form-group">
+                        <select class="form-control" name="village" id="village">
+                          
+                        </select>
+                      </div>
+                    
+                    <div class="form-group">
+                        <select class="form-control" name="martialstatus" id="exampleFormControlSelect1">
+                         
+                          <option>Married</option>
+                          <option>Unmarried</option>
+                        </select>
+                      </div>
+
+                    <p><input type="date" placeholder="Date of Birth..." name="dob" class="form-control" oninput="this.className = ''"></p>
+
+                  <div class="from-group mb-1 text-center">
+                    <legend class="col-form-label col-sm-2 pt-0">Gender:</legend>
+                      <div class="row">
+                          <div class="col">
+                            <div class="form-check">
+                                <input  type="radio" class="form-check-input" name="gender" id="gridRadios1" value="Male" >
+                                <label class="form-check-label" for="gridRadios1">Male</label>
+                              </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-check">
+                                <input  type="radio" class="form-check-input" name="gender" id="gridRadios2" value="Female" >
+                                <label class="form-check-label" for="gridRadios2">Female</label>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  
+                </div>
+                
+                <div class="tab">
+                    <p><input type="text" name="lang" placeholder="Language..." class="form-control" oninput="this.className = ''"></p>
+                    <p><input type="text" name="height" placeholder="Height..." class="form-control" oninput="this.className = ''"></p>
+                    <p><input type="text" name="identify" placeholder="Identification..." class="form-control" oninput="this.className = ''"></p>
+                    <p><input type="text" name="status" placeholder="Status..." class="form-control" oninput="this.className = ''"></p>
+                </div>
+                
+                <div class="tab">Image Upload:
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <video style="display: none;" id="video" width="320" height="240" autoplay></video>
+                                <canvas id="canvas" width="620" height="540" style="display: none;"></canvas>
+                                <img style="display: none;" id="blah" width="320px" src="" alt="" />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <a class="btn btn-primary" id="start-camera">Take Photo</a>
+                                <!-- <p id="or" class="m-0 p-2">OR</p> -->
+                                <a class="btn btn-primary" id="click-photo" style="display:none;">Capture</a>
+                                <p><input type="file" id="selectimage" onchange="readURL(this);" style="border: 0; padding: 0; padding-top: 10px;" name="img" class="form-control-file" id=""></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                  
+                </div>
+                
+
+                <div style="overflow:auto;">
+                  <div style="float:right;">
+                    <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                  </div>
+                </div>
+                
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;margin-top:40px;">
+                  <span class="step"></span>
+                  <span class="step"></span>
+                  <span class="step"></span>
+                  <span class="step"></span>
+                </div>
+                
+                </form> 
+        </div>
+    </div>
+    <script>
+        function geturl(){
+            return `{% url 'addcriminal' %}`
+        }
+    </script>
+</div>
+
+{% block script %}
+    <script src="../static/main.js"></script>
+{% endblock script %}
+{% endblock body %}
+
+
+<!-- <div class="temp">
+    <style>
+        .registration{
+            
+            display: flex;
+            justify-content: center;  
+            align-items: center;   
+            height: 90vh;
+        } 
+        form{
+            padding: 40px;
+            border: 1px solid rgb(56, 81, 245); 
+            border-radius: 20px;   
+        }
+        
+    </style>
+    
+    <div class="con container">
+        <div class="row">
+            <div class="col">
+                
+                <div class="registration">
+                    <form method="Post">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">First Name</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Last Name</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                          </div>
+                        <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <form method="POST" novalidate enctype="multipart/form-data">
+    {% csrf_token %}
+    {{cform.as_p}}
+    <button type="submit">submit</button>
+</form> -->
