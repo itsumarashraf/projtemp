@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %} Criminal Records {%endblock title%}
+
+{% block links %}
+
+{% endblock links %}
+  
+
+
+{%block body%}
+
+<style>
+  .addrecord{
+    float: right;
+    margin-bottom:20px;
+  }
+</style>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-title">
+        DAtaTables
+      </div>
+      <div class="panel-body table-responsive">
+        <a href="{% url 'addcriminal' %}" class="btn btn-warning addrecord"><i class="fa fa-plus" aria-hidden="true"></i> Add Record</a>
+          <table id="example0" class="table display">
+              <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Maritial Status</th>
+                    <th>Action</th>
+                  </tr>
+              </thead>
+           
+           
+              <tbody>
+                {% for c in criminal %}
+                  <tr>
+                    <td>{{c.fname}} {{c.lname}}</td>
+                    <td>{{c.residence}}</td>
+                    <td>{{c.sex}}</td>
+                    <td>{{c.contact_no}}</td>
+                    <td>{{c.martial_status}}</td>
+                    <td>
+                      <a href="{% url 'viewcriminal' c.id %}" class="btn btn-primary">View</a>
+                      <a href="{% url 'editcriminal' c.id %}" class="btn btn-warning">Edit</a>
+                    </td>
+                  </tr> 
+                  {% endfor %}
+              </tbody>
+          </table>
+
+
+      </div>
+
+    </div>
+ </div>
+
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+ <script>
+    $(document).ready(function() {
+        $('#example0').DataTable();
+    } );
+    </script>
+
+{% block scripts %}
+<script src="{% static 'js/datatables/datatables.min.js' %}"></script>
+{% endblock scripts %}
+ 
+{%endblock body%}
+

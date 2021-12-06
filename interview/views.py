@@ -1,18 +1,18 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from .models import *
 from .filters import userfilter
 from criminals.models import criminal
 
 def subadmin(request):
-    user=request.user
-    print(user)
-    if user.is_authenticated:
+    if request.user.is_authenticated:
+        user=request.user
         que=questionAnswer.objects.filter(user=user)
+        search = userfilter(request.GET, queryset=criminal.objects.all())
+        searchdata = search.qs
     
-    search = userfilter(request.GET, queryset=criminal.objects.all())
-    searchdata = search.qs
-   
-    return render(request,'subadmin.html',{'que':que,'search':search, 'searchdata':searchdata})
+        return render(request,'subadmin.html',{'que':que,'search':search, 'searchdata':searchdata})
+    else:
+        return redirect('userlogin')
 
 def viewquestions(request,id):
     p=criminal.getcriminal(id)

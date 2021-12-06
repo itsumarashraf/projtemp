@@ -39,7 +39,7 @@ function myfun(){
 // ******************************** WEBCAM PHOTO FUNCTIONALITY ********************************************
 
 let image_data_url
-let camera_button = document.querySelector("#start-camera");
+  let camera_button = document.querySelector("#start-camera");
   let video = document.querySelector("#video");
   let click_button = document.querySelector("#click-photo");
   let canvas = document.querySelector("#canvas");
@@ -60,6 +60,7 @@ let camera_button = document.querySelector("#start-camera");
       video.style.display="none";
       canvas.style.display="block"
       kill();
+      // add value to input webcaming feild to post
       document.getElementById('webcamimg').value = image_data_url;
 
       // data url of the image
@@ -155,6 +156,22 @@ $(document).ready(function(){
               dob:{required:"This field is required"},
               height:{digits:"Enter correct height"}
                  },
+
+                 highlight: function(element) {
+                  $(element).closest('.form-group').addClass('has-error');
+              },
+              unhighlight: function(element) {
+                  $(element).closest('.form-group').removeClass('has-error');
+              },
+              errorElement: 'span',
+              errorClass: 'help-block',
+              errorPlacement: function(error, element) {
+                  if(element.parent('.input-group').length) {
+                      error.insertAfter(element.parent());
+                  } else {
+                      error.insertAfter(element);
+                  }
+              }
                  
   });
   
@@ -190,10 +207,10 @@ $(document).ready(function(){
 $('#submit').on('click',function(){
   var form = document.getElementById('myform');
   var formdata = new FormData(form);
-  formdata.append("file", $("input[id^='selectimage']")[0].files[0]);
+  // formdata.append("file", $("input[id^='selectimage']")[0].files[0]);
   $.ajax({ 
           type: 'POST',  
-          url: `http://127.0.0.1:8080/addcriminal`,  
+          url: `/addcriminal`,  
           data:  formdata,
           contentType:false,
           processData:false,  
@@ -223,3 +240,9 @@ $('#submit').on('click',function(){
 
 // Data Picker Initialization
 $('.datepicker').datepicker();
+
+
+
+
+
+

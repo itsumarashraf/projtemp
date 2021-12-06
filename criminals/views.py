@@ -20,8 +20,12 @@ from django.core.files.base import ContentFile
 # @permission_required('criminals.delete_crime')
 def home(request):
     criminals= criminal.objects.all()
-    return render(request,'index.html',{'criminal':criminals})
+    return render(request,'index.html')
 
+@adminOnly
+def viewcriminals(request):
+    criminals= criminal.objects.all()
+    return render(request,'viewcriminals.html',{'criminal':criminals})
 
 @csrf_exempt
 @adminOnly
@@ -33,44 +37,45 @@ def addcriminal(request):
     #     criminal_form.save()
 
     if request.method=="POST":
-        fname=request.POST.get('fname')
-        lname=request.POST.get('lname')
-        email=request.POST.get('email')
-        phone=request.POST.get('phone')
-        height=request.POST.get('height')
-        gender=address=request.POST.get('gender')
-        martialstatus=request.POST.get('martialstatus')
-        address=request.POST.get('address')
-        lang=request.POST.get('lang')
-        identify=request.POST.get('identify')
-        status=request.POST.get('status')
-        dob=request.POST.get('dob')
+        # fname=request.POST.get('fname')
+        # lname=request.POST.get('lname')
+        # email=request.POST.get('email')
+        # phone=request.POST.get('phone')
+        # height=request.POST.get('height')
+        # gender=address=request.POST.get('gender')
+        # martialstatus=request.POST.get('martialstatus')
+        # address=request.POST.get('address')
+        # lang=request.POST.get('lang')
+        # identify=request.POST.get('identify')
+        # status=request.POST.get('status')
+        # dob=request.POST.get('dob')
 
-        file = request.FILES.get('file')
+        file = request.FILES.get('img')
         if file:
-            print('picture uploaded successfully')
+            # print('picture uploaded successfully')
             print(request.FILES)
-            fs = FileSystemStorage()
-            filename = fs.save(file.name, file)
-            print('filename is ',filename)
-            url = fs.url(filename)
-            print(url)
-
-            user= criminal(fname=fname,lname=lname,email=email,contact_no=phone,dob=dob,height=height,
-            language=lang,martial_status=martialstatus,residence=address,status=status,
-            identification=identify,sex=gender,profile_pic=filename)
+            # fs = FileSystemStorage()
+            # filename = fs.save(file.name, file)
+            # print('filename is ',filename)
+            # url = fs.url(filename)
+            # print(url)
+            
+            # user= criminal(fname=fname,lname=lname,email=email,contact_no=phone,dob=dob,height=height,
+            # language=lang,martial_status=martialstatus,residence=address,status=status,
+            # identification=identify,sex=gender,profile_pic=filename)
             # user.save()
         else:
             data=request.POST.get('webcamimg')
+            print('this will be the webcam image : ', request.FILES.get('webcaming'))
             format, imgstr = data.split(';base64,')
             ext = format.split('/')[-1]
             print('extension is  :',ext)
             data = ContentFile(base64.b64decode(imgstr), name='webcamimage.'+ ext)
             
-            user= criminal(fname=fname,lname=lname,email=email,contact_no=phone,dob=dob,height=height,
-            language=lang,martial_status=martialstatus,residence=address,status=status,
-            identification=identify,sex=gender,profile_pic=data)
-            user.save()
+            # user= criminal(fname=fname,lname=lname,email=email,contact_no=phone,dob=dob,height=height,
+            # language=lang,martial_status=martialstatus,residence=address,status=status,
+            # identification=identify,sex=gender,profile_pic=data)
+            # user.save()
         
     return render(request,'addcriminal.html')
 
@@ -85,8 +90,6 @@ def docs(request,id):
     dform=DocumentsForm(request.POST or None, request.FILES or None)
     if dform.is_valid():
         dform.save()
-    if request.method=="POST":
-        webvideo.objects.create(vid=request.POST.get('vid'))
     return render(request,'viewdocs.html',{'criminal':crim,'form':dform})
 
 @adminOnly
@@ -138,3 +141,21 @@ def register(request):
         form.instance.is_staff=True
         form.save()
     return render(request,'register.html',{'form':form})
+
+
+def criminalvideo(request,id):
+    print(id)
+    try:
+        vid =webvideo.objects.filter(criminal=id)
+    except:
+        vid =id
+    return render(request,'video.html',{'umar':vid})
+
+
+@csrf_exempt
+def recordvideo(request,id):
+    crim=criminal.objects.get(id=id)
+    # if request.method=='POST':
+    #     webvideo.objects.create(criminal=crim, vidname=request.FILES.get('file'))
+    return render(request, 'recordvideo.html',{'criminal':crim})
+    

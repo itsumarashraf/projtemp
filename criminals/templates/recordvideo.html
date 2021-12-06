@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %} Record Video {%endblock title%}
+
+{% block links %}
+
+{% endblock links %}
+  
+
+
+{%block body%}
+<style>
+    .recorderset{
+        display: flex;
+        justify-content: center;
+    }
+    .timer{
+        display: flex;
+        justify-content: center;
+    }
+    .buttons{
+        display: flex;
+        justify-content: center;
+    }
+    .buttons > button{
+        margin-right: 4px;
+    }
+    
+</style>
+    <div class="container">
+        <div class="recorderset">
+            <div class="player"">
+                <video id="video" width="420" height="340" autoplay></video>
+            </div>
+        </div>
+        <div class="timer" id="timer">
+            <span><i class="fa fa-dot-circle-o" id="rec" style="margin-right: 5px;" aria-hidden="true"></i></span><span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>
+        </div>
+    
+        <div class="buttons">
+            <button class="btn btn-info" id="start-camera">Start Camera</button>
+            <button class="btn btn-danger" id="start-record">Start Recording</button>
+            <button class="btn btn-primary" id="stop-record">Stop Recording</button>
+            <a id="postlink" href="{% url 'recordvideo' criminal.id %}" hidden></a>
+        </div>
+    </div>
+    
+    <!-- <a id="download-video" download="test.webm">Download Video</a> -->
+    
+    
+
+   
+
+
+    {% block scripts %}
+    <!-- <script src="{% static 'main.js' %}"></script> -->
+    <script src="{% static 'capvideo.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% endblock scripts %}
+
+{%endblock body%}

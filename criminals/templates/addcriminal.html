@@ -1,82 +1,103 @@
 {% extends 'base.html' %}
-
-{%block title %} Add Crime {%endblock title%}
+{% load static%}
+{%block title %} Add Record {%endblock title%}
 
 {%block links %}
-<link rel="stylesheet" href="../static/registration.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">  
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+  <link rel="stylesheet" href="{% static 'registration.css' %}">
 {%endblock links%}
   
 {%block body%}
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 offset-2">
-      <div id="svg_wrap"></div>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div id="svg_wrap"></div>
 <form action="" id="myform" name="myistform" method="post"  enctype="multipart/form-data">
- <h1>Online Application</h1>
+ <h1 class=text-center>Add Record</h1>
 <section id=sect_one>
   <p>Personal information</p>
+  <div class="form-group">
   <input type="text" id="fname" name="fname" required placeholder="First name..." class="form-control">
+  </div>
+  <div class="form-group">
   <input type="text" id="lname" name="lname" required placeholder="Last name..." class="form-control">
-  <input type="email" id="email" name="email" required placeholder="E-mail..." class="form-control">
+  </div>
+  <div class="form-group">
+  <!-- <input type="email" id="email" name="email" required placeholder="E-mail..." class="form-control">
+  </div>
+  <div class="form-group">
   <input type="phone" id="phone" name="phone" required placeholder="Phone..." class="form-control">
+  </div> -->
 </section>
 
 <section>
   <p>Address</p>
-  <input type="text" name="pin" id="pin" onchange="myfun()" placeholder="Zip Code..." class="form-control">
-    <input type="text" name="address" id="district" placeholder="District..." class="form-control">
-    <input type="text" name="country" id="country" placeholder="Country..." class="form-control">
-    <div class="form-group">
-      <select class="form-control" name="village" id="village">
-        
-      </select>
-    </div>
+  <div class="form-group row">
+    <div class="col-md-4">
+        <label for="zip" class="form-label">Zip</label>
+        <input type="text"  name="pin" id="pin" onchange="myfun()" class="form-control" placeholder="Zip Code..."id="zip">
+      </div>
+    <div class="col-md-8">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" name="country" id="country" class="form-control" id="country" placeholder="Country...">
+      </div>
+</div>
+  <div class="form-group row">
+    <div class="col-md-4">
+        <label for="city" class="form-label">District</label>
+        <input type="text" name="address" id="district" placeholder="District..." class="form-control" id="city">
+      </div>
+      <div class="col-md-4">
+        <label for="state" class="form-label">State</label>
+        <input type="text" name="state" id="state" placeholder="State..." class="form-control" id="state">
+      </div>
+      <div class="col-md-4">
+        <label for="town" class="form-label">Town</label>
+        <input type="text" name="town" id="town" placeholder="Town..." class="form-control" id="town">
+      </div>
+  </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <select class="form-control" name="martialstatus" id="marriage">
-       
         <option>Married</option>
         <option>Unmarried</option>
       </select>
-    </div>
+    </div> -->
 
-  <input type="date" placeholder="Date of Birth..." name="dob" class="date form-control">
+  <div class="form-group">
+    <input type="date" placeholder="Date of Birth..." required name="dob" class="date form-control">
+  </div>
   <script>
     $(".date").datepicker({
         format: "yyy-mm-dd",
       });
   </script>
-  <div class="from-group mb-1 text-center">
-    <legend class="col-form-label col-sm-2 pt-0">Gender:</legend>
-      <div class="row">
-          <div class="col">
-            <div class="form-check">
-                <input  type="radio" class="form-check-input" name="gender" id="gridRadios1" value="Male" >
-                <label class="form-check-label" for="gridRadios1">Male</label>
-              </div>
-          </div>
-          <div class="col">
-            <div class="form-check">
-                <input  type="radio" class="form-check-input" name="gender" id="gridRadios2" value="Female" >
-                <label class="form-check-label" for="gridRadios2">Female</label>
-              </div>
-          </div>
-      </div>
+  
+  <div class="form-group mb-1">
+    <p class="margin-t-20">Gender</p>            
+    <div class="radio radio-info radio-inline">
+        <input type="radio" id="Male" value="option1" name="gender" value="Male" checked>
+        <label for="Male"> Male </label>
+    </div>
+    <div class="radio radio-inline">
+        <input type="radio" id="Female" value="option1" name="gender" value="Female">
+        <label for="Female"> Female </label>
+    </div>
   </div>
 </section>
 
-<section>
+<!-- <section>
   <p>Contact information</p>
   <input type="text" name="lang" placeholder="Language..." class="form-control">
   <input type="text" name="height" placeholder="Height..." class="form-control">
   <input type="text" name="identify" placeholder="Identification..." class="form-control">
   <input type="text" name="status" placeholder="Status..." class="form-control">
-</section>
+</section> -->
 
 <section>
   <p>Application</p>
@@ -101,16 +122,15 @@
 </div>
 </section>
 
-
-    
     <div class="button" id="prev">&larr; Previous</div>
     <div class="button chalo" id="next">Next &rarr;</div>
     <div class="button" id="submit">Submit</div>
-  </div>
-  </div>
 
 </form>
+  </div>
+  <div class="col-md-2"></div>
 </div>
+
 
 <style>
   .error{
@@ -125,7 +145,7 @@
 {% endblock body %}
 
 {% block scripts %}
-    <script src="../static/main.js"></script>
+    <script src="{% static 'main.js' %}"></script>
     <script src="../static/registration.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

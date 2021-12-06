@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %} Videos {%endblock title%}
+
+{% block links %}
+
+{% endblock links %}
+  
+
+
+{%block body%}
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% if umar %}
+                {% for umar in umar %}
+                <video width="320" height="240" controls>
+                    <source src="{{umar.vidname.url}} type="video/mp4">
+                    <source src="{{umar.vidname.url}}" type="video/ogg">
+                Your browser does not support the video tag.
+                </video>
+                {% endfor %}
+            {% else %}
+                <div class="nodata" style=" height: 65vh;display: flex; justify-content: center;">
+                    <h3 style=" align-self: center;">No Videos Avaliable for This Person</h3>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-2"></div>
+        </div>
+    </div>
+
+
+
+    {% block scripts %}
+    <!-- <script src="{% static 'main.js' %}"></script> -->
+    <script src="{% static 'capvideo.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% endblock scripts %}
+
+{%endblock body%}

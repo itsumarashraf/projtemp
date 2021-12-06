@@ -1,16 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit</title>
-</head>
-<body>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ cform.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+
+{% extends 'base.html' %}
+{% load static %}
+{%block title %} Videos {%endblock title%}
+
+{% block links %}
+
+{% endblock links %}
+
+{%block body%}
+    
+
+
+
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ cform.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+
+
+
+    
+{% block scripts %}
+<!-- <script src="{% static 'main.js' %}"></script> -->
+<script src="{% static 'capvideo.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock scripts %}
+
+{%endblock body%}
