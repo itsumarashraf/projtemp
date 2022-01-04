@@ -3,33 +3,62 @@
 console.log('hello from main.js file');
 
 
+function zipfun(){
+  var zip = document.getElementById("zip").value;
+  // console.log(zip)
+  $.ajax({
+      type:'POST',
+      url: '/addcriminal',
+      data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+              zipp:zip
+          },
+
+      success: function(response){
+          var data = JSON.parse(response);
+          console.log(data.country)
+          document.getElementById("country").value=data.country;
+          document.getElementById("district").value=data.district;
+          document.getElementById("state").value=data.state;
+          document.getElementById("town").value=data.town;
+          if(data.country){
+              console.log("True")
+          }else{
+              console.log("False")
+          }
+         
+          
+      }
+  });
+}
+
+
 // ************ API TO FETCH DATA ON ZIPCODE *******************************
 
-function myfun(){
-  var pin=document.getElementById("pin").value;
-  var url = `https://api.postalpincode.in/pincode/${pin}`;
-  fetch(url)
-  .then(response => response.json())
-  .then(data => {
-              console.log("--------Tehsil--------");
+// function myfun(){
+//   var pin=document.getElementById("pin").value;
+//   var url = `https://api.postalpincode.in/pincode/${pin}`;
+//   fetch(url)
+//   .then(response => response.json())
+//   .then(data => {
+//               console.log("--------Tehsil--------");
 
-                data[0].PostOffice.forEach(PostOffice => {
-                  console.log(PostOffice.Name)
-                  var opt = document.createElement("option");
-                  opt.value=PostOffice.Name;
-                  opt.text=PostOffice.Name;
-                  document.getElementById("village").appendChild(opt);
-                })
-                console.log("---------------------");
-               console.log(data[0].PostOffice[0].Country);
-               console.log(data[0].PostOffice[0].State);
-               console.log(data[0].PostOffice[0].Division);
-               document.getElementById("district").value=data[0].PostOffice[0].Division;
-              document.getElementById("country").value=data[0].PostOffice[0].Country;}
-  )
-  .catch((error) => console.log("invalid pincode"));
+//                 data[0].PostOffice.forEach(PostOffice => {
+//                   console.log(PostOffice.Name)
+//                   var opt = document.createElement("option");
+//                   opt.value=PostOffice.Name;
+//                   opt.text=PostOffice.Name;
+//                   document.getElementById("village").appendChild(opt);
+//                 })
+//                 console.log("---------------------");
+//                console.log(data[0].PostOffice[0].Country);
+//                console.log(data[0].PostOffice[0].State);
+//                console.log(data[0].PostOffice[0].Division);
+//                document.getElementById("district").value=data[0].PostOffice[0].Division;
+//               document.getElementById("country").value=data[0].PostOffice[0].Country;}
+//   )
+//   .catch((error) => console.log("invalid pincode"));
   
-}
+// }
 
 // ######################################## API CALL ENDS HERE ####################################################
 
@@ -38,12 +67,14 @@ function myfun(){
 
 // ******************************** WEBCAM PHOTO FUNCTIONALITY ********************************************
 
-let image_data_url
+  let image_data_url=[]
   let camera_button = document.querySelector("#start-camera");
   let video = document.querySelector("#video");
   let click_button = document.querySelector("#click-photo");
   let canvas = document.querySelector("#canvas");
   let selectimage= document.querySelector("#selectimage");
+  
+  var shutter = new Audio('static/audioeffect/shutter.mp3');
 
   camera_button.addEventListener('click', async function() {
       let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
@@ -52,28 +83,24 @@ let image_data_url
       camera_button.style.display="none";
       video.style.display="block";
       selectimage.style.display="none";
+      
   });
 
   click_button.addEventListener('click', function() {
+      shutter.play();
       canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-      image_data_url = canvas.toDataURL('image/jpeg');
-      video.style.display="none";
-      canvas.style.display="block"
-      kill();
+      image_data_url.push(canvas.toDataURL('image/jpeg'));
+      
+      //gets img and appends to a shorts div
+      $('#shots').append("<img src="+canvas.toDataURL('image/jpeg')+" height='100px' style='margin:5px'; />")
+      
+      
+      // canvas.toDataURL('image/jpeg');
+      // video.style.display="none";
+      // canvas.style.display="block"
+      // kill();
       // add value to input webcaming feild to post
       document.getElementById('webcamimg').value = image_data_url;
-
-      // data url of the image
-      console.log(image_data_url);
-      // $.ajax({  
-      //       type: 'POST',  
-      //       url: `http://127.0.0.1:8000/addcriminal`,  
-      //       data: { img: image_data_url },  
-            
-      //       success: function (out) {  
-      //           alert('Image uploaded successfully..');  
-      //       }  
-      //   }); 
       
   });
 
@@ -177,18 +204,18 @@ $(document).ready(function(){
   
   
   if(frm.valid()){
-    console.log('form is valid')
+    // console.log('form is valid')
     var idd = document.querySelector(".chalo").id;
-    console.log(idd)
+    // console.log(idd)
     if(idd !== 'next'){
     document.getElementById(idd).setAttribute('id', 'next');
   }
     
   }else{
-    console.log('form is not valid')
+    // console.log('form is not valid')
     document.getElementById('next').setAttribute('id', 'stop');
     var idd = document.querySelector(".chalo").id;
-    console.log(idd)
+    // console.log(idd)
     
   }
   });
@@ -207,6 +234,7 @@ $(document).ready(function(){
 $('#submit').on('click',function(){
   var form = document.getElementById('myform');
   var formdata = new FormData(form);
+  formdata.append('webcam', JSON.stringify(image_data_url));
   // formdata.append("file", $("input[id^='selectimage']")[0].files[0]);
   $.ajax({ 
           type: 'POST',  
@@ -220,14 +248,14 @@ $('#submit').on('click',function(){
                 $('#submit').value="Please wait....."
           },
           success: function (out) {
-              Swal.fire(
+              swal(
                 '',
                 'Data Inserted Successfully',
                 'success'
               )
           },
           error: function (error){
-            Swal.fire({
+            swal({
               icon: 'error',
               title: 'Oops.. there was some error in saving your data',
               text: error.statusText,

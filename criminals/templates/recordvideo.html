@@ -3,7 +3,7 @@
 {%block title %} Record Video {%endblock title%}
 
 {% block links %}
-
+<link rel="stylesheet" href="{% static 'css/plugin/sweet-alert/sweet-alert.css' %}">
 {% endblock links %}
   
 
@@ -55,8 +55,11 @@
     {% block scripts %}
     <!-- <script src="{% static 'main.js' %}"></script> -->
     <script src="{% static 'capvideo.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="{% static 'js/sweet-alert/sweet-alert.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
     {% endblock scripts %}
 
 {%endblock body%}

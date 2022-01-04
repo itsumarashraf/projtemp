@@ -1,40 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-2">
-                    <table class="table mt-5">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Question</th>
-                            <th scope="col">Answer</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            {% if que %}
-                            {% for i in que %}
-                          <tr>
-                            <th scope="row">{{forloop.counter}}</th>
-                            <td>{{i.question}}</td>
-                            <td>{{i.answer}}</td>
-                          </tr>
-                          {% endfor %}
-                          {% else %}
-                          
-                          {% endif %}
-                        </tbody>
-                      </table>
-            </div>
-        </div>
+{% extends 'base.html' %}
+{%block title %} Questions {%endblock title%}
+{% load static %}
+{% block links %}
+
+{% endblock links %}
+
+{% load static %}
+
+{%block body%}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+  <div class="container">
+    <div class="row">
+    <div class="col-lg-10 col-md-offset-1">
+      {% if que %}
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Question</th>
+              <th scope="col">Answer</th>
+              <th scope="col">Interviewer</th>
+              <th scope="col">Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in que %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{i.question}}</td>
+                <td>{{i.answer}}</td>
+                <td>{{i.user | upper}}</td>
+                <td>{{i.createdon}}</td>
+                {% if request.user == i.user %}
+                  <td><a href="{% url 'deletequeans' i.id %}" ><i class="fa fa-trash" style="font-size: 20px;" aria-hidden="true"></i></a></td>
+                {% else %}
+                <td><i class="fa fa-trash" style="font-size: 20px;" aria-hidden="true"></i></td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        
+      {% if request.user.is_staff %}
+        <h3>Ask More Questions</h3>
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="from-group">
+            <input type="text" name="question" placeholder="Ask a Question" class="form-control">
+          </div><br>
+          <div class="from-group">
+            <input type="text" name="answer" placeholder="Answer" class="form-control">
+          </div><br>
+          <button type="submit" class="btn btn-warning">Submit</button>
+        </form>
+        {% endif %}
+
+        {% else %}
+        {% if request.user.is_staff %}
+          <h2>No Questions have been asked to this Person!</h2>
+          <h3>Ask a New Question</h3>
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="from-group">
+              <input type="text" name="question" placeholder="Ask a Question" class="form-control">
+            </div><br>
+            <div class="from-group">
+              <input type="text" name="answer" placeholder="Answer" class="form-control">
+            </div><br>
+            <button type="submit" class="btn btn-warning">Submit</button>
+          </form>
+        {% endif %}
+        {% endif %}
+
+
+        
+        
+        
+              
+
     </div>
-</body>
-</html>
+ 
+  </div> <!--  row end -->
+  </div> <!--  container end -->
+           
+
+{% block scripts %}
+
+{% endblock scripts %}
+  
+{%endblock body%}
+    

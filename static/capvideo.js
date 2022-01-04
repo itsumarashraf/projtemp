@@ -74,7 +74,7 @@ stop_button.addEventListener('click', function() {
             data: umar,  
             
             success: function (out) {  
-                Swal.fire(
+                swal(
                 '',
                 'Video Captured and Saved Successfully',
                 'success'
@@ -82,6 +82,8 @@ stop_button.addEventListener('click', function() {
             }  
         });
 });
+
+
 
 let hour = 0;
 let minute = 0;

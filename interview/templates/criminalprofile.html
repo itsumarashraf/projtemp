@@ -1,0 +1,220 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{%block title %} Criminal Profile {%endblock title%}
+
+{%block body%}
+
+{% if request.user.is_superuser %}
+<style>
+    #top{
+        background-color: brown !important;
+    }
+</style>
+{% endif %}
+{% block links %}
+<link rel="stylesheet" href="../../static/owl/owl.carousel.min.css">
+<link rel="stylesheet" href="../../static/owl/owl.theme.default.css">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+{% endblock links %}
+
+<style>
+    .imagediv{
+        object-fit: cover;
+        width: 300px; 
+    }  
+    .profile-links a{
+        text-decoration: none;
+        font-size: 14px;
+        color: rgb(0, 149, 255);
+        transition: 0.3s;
+    }
+    .profile-links a:hover{
+        background-color: rgb(255, 255, 255);
+        border-left: 5px solid rgb(6, 213, 245);
+    }
+    .profile-links a .fa{
+        margin-right: 8px;
+    }
+    .profile-links a :hover, .fa:hover{
+        color: brown;
+    }
+</style>
+
+<div class="container emp-profile">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <div class="owl-carousel">
+                    {% for img in criminal.criminalimages_set.all %}
+                        <div class="imagediv"><img class="pp" src="{{img.image.url}}"  alt=""></div>
+                    {% endfor %}
+                </div>                    
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                <h2>
+                    {{criminal.fname}} {{criminal.lname}}
+                </h2>
+                <h6>
+                    {% for address in criminal.criminaladdress_set.all %}
+                        {{address.town}}, {{address.district}}
+                    {% endfor %}
+                </h6>
+                <p class="proile-rating">Criminal Id : <span>{{criminal.code}}</span></p>
+                <p class="proile-rating">Age : <span>{{criminal.dob}}</span></p>
+                <div class="tags">
+                    {% for tags in criminal.tags.all %}
+                            <a href="{% url 'filterbytag' tags.slug %}" class="btn btn-sm btn-danger" style="margin-bottom: 10px;">#{{tags}}</a>
+                    {% endfor %}
+                </div>
+                <br>
+                
+            </div>
+        </div>
+        <div class="col-md-2">
+            {% if request.user.is_superuser or request.user.is_staff %}
+            <button class="btn btn-warning"><i class="fa fa-file" aria-hidden="true"></i> Create Report</button>
+            {% else %}
+            <a href="#" class="btn btn-primary float-right" style="float: right;" data-toggle="modal" data-target="#myModal">Submit a Review</a>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title">Give Review about this person</h4>
+                  </div>
+
+                  <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                      <textarea class="form-control" name="review" rows="3" id="review" placeholder="Type your Review..."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-links">
+                <h4>Links:</h4>
+                    <div class="col-md-10">
+                        <a href="{% url 'uploaddocuments' criminal.id %}" class=" btn-block btn-sm"><i class="fa fa-upload" aria-hidden="true"></i>Documents</a>
+                        <a href="{% url 'criminalvid' criminal.id %}" class=" btn-block btn-sm"><i class="fa fa-film" aria-hidden="true"></i> Videos</a>
+                        <a href="{% url 'viewquestions' criminal.id %}" class="btn-block btn-sm"><i class="fa fa-comment-o" aria-hidden="true"></i>Questions</a>
+                        {% if request.user.is_superuser or request.user.is_staff %}
+                        <a href="{% url 'recordvideo' criminal.id %}" class=" btn-block btn-sm"><i class="fa fa-video-camera" aria-hidden="true"></i>Record Video</a>
+                        <a href="{% url 'reviews' criminal.id %}" class="btn-block btn-sm"><i class="fa fa-rss" aria-hidden="true"></i> Reviews</a>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <ul class="nav nav-tabs tabcolor5-bg" role="tablist">
+                <li role="presentation" class="active"><a href="#About10" aria-controls="About10" role="tab" data-toggle="tab">About</a></li>
+                <li role="presentation"><a href="#family" aria-controls="family" role="tab" data-toggle="tab">Family</a></li>
+                <li role="presentation"><a href="#other" aria-controls="other" role="tab" data-toggle="tab">Other</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="About10">
+                    <div c<div class="row">
+                        <div class="col-md-6">
+                            <label>Criminal Id</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{criminal.code}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{criminal.fname}} {{criminal.lname}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Gender</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{criminal.gender}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Date of Birth</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{criminal.dob}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Maritial Status</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{criminal.martial_status}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Address</label>
+                        </div>
+                        <div class="col-md-6">
+                            {% for address in criminal.criminaladdress_set.all %}
+                            <p>{{address.town}}, {{address.district}} - {{address.state}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Crime</label>
+                        </div>
+                        <div class="col-md-6">
+                            {% for crime in criminal.crime_set.all %}
+                            <p>{{crime.name}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div role="tabpanel" class="tab-pane" id="family">
+                  <p>Ut in leo ut libero sodales feugiat</p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="other">
+                  <p>Duis ac enim diam</p>
+                </div>
+              </div>
+        </div>
+    </div>          
+</div>
+
+
+    {% block scripts %}
+    <script src="{% static 'owl/owl.carousel.min.js' %}"></script>
+    {% endblock scripts %}
+  
+    <script>
+        $(document).ready(function(){
+    $(".owl-carousel").owlCarousel({
+        items : 1,
+        margin: 0,
+    });
+  });
+  </script>
+    {%endblock body%}
+

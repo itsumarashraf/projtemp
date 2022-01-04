@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">  
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
   <link rel="stylesheet" href="{% static 'registration.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap-tagsinput.css' %}">
+  <link rel="stylesheet" href="{% static 'css/plugin/sweet-alert/sweet-alert.css' %}">
 {%endblock links%}
   
 {%block body%}
@@ -28,11 +30,6 @@
   <input type="text" id="lname" name="lname" required placeholder="Last name..." class="form-control">
   </div>
   <div class="form-group">
-  <!-- <input type="email" id="email" name="email" required placeholder="E-mail..." class="form-control">
-  </div>
-  <div class="form-group">
-  <input type="phone" id="phone" name="phone" required placeholder="Phone..." class="form-control">
-  </div> -->
 </section>
 
 <section>
@@ -40,7 +37,7 @@
   <div class="form-group row">
     <div class="col-md-4">
         <label for="zip" class="form-label">Zip</label>
-        <input type="text"  name="pin" id="pin" onchange="myfun()" class="form-control" placeholder="Zip Code..."id="zip">
+        <input type="text"  name="zip" id="zip" onchange="zipfun()" class="form-control" placeholder="Zip Code..."id="zip">
       </div>
     <div class="col-md-8">
         <label for="country" class="form-label">Country</label>
@@ -50,7 +47,7 @@
   <div class="form-group row">
     <div class="col-md-4">
         <label for="city" class="form-label">District</label>
-        <input type="text" name="address" id="district" placeholder="District..." class="form-control" id="city">
+        <input type="text" name="district" id="district" placeholder="District..." class="form-control" id="city">
       </div>
       <div class="col-md-4">
         <label for="state" class="form-label">State</label>
@@ -62,12 +59,12 @@
       </div>
   </div>
 
-    <!-- <div class="form-group">
+    <div class="form-group">
       <select class="form-control" name="martialstatus" id="marriage">
-        <option>Married</option>
-        <option>Unmarried</option>
+        <option value="Married">Married</option>
+        <option value="Unmarried">Unmarried</option>
       </select>
-    </div> -->
+    </div>
 
   <div class="form-group">
     <input type="date" placeholder="Date of Birth..." required name="dob" class="date form-control">
@@ -81,23 +78,28 @@
   <div class="form-group mb-1">
     <p class="margin-t-20">Gender</p>            
     <div class="radio radio-info radio-inline">
-        <input type="radio" id="Male" value="option1" name="gender" value="Male" checked>
+        <input type="radio" id="Male" value="Male" name="gender" value="Male" checked>
         <label for="Male"> Male </label>
     </div>
     <div class="radio radio-inline">
-        <input type="radio" id="Female" value="option1" name="gender" value="Female">
+        <input type="radio" id="Female" value="Female" name="gender" value="Female">
         <label for="Female"> Female </label>
     </div>
   </div>
 </section>
 
-<!-- <section>
-  <p>Contact information</p>
-  <input type="text" name="lang" placeholder="Language..." class="form-control">
-  <input type="text" name="height" placeholder="Height..." class="form-control">
-  <input type="text" name="identify" placeholder="Identification..." class="form-control">
-  <input type="text" name="status" placeholder="Status..." class="form-control">
-</section> -->
+<section>
+  <p>Add Tags</p>
+  <div class="form-group row">
+  <div class="col">
+      <label for="town" class="form-label">Tags</label>
+      <input type="text" name="tag" value="" class="form-control" data-role="tagsinput" >
+      <script>
+        
+      </script>
+    </div>
+  </div>
+</section>
 
 <section>
   <p>Application</p>
@@ -107,15 +109,16 @@
             <video style="display: none;" id="video" width="320" height="240" autoplay></video>
             <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
             <img style="display: none;" id="blah" width="320px" src="" alt="" />
+            <div id="shots"></div>
         </div>
     </div>
     <div class="row mt-2">
-        <div class="col-lg-4 offset-4" id="userpic">
+        <div class="col-md-4" id="userpic">
             <a class="btn btn-primary" id="start-camera">Take Photo</a>
             <!-- <p id="or" class="m-0 p-2">OR</p> -->
-            <a class="btn btn-primary" id="click-photo" style="display:none;">Capture</a>
+            <a class="btn btn-primary" id="click-photo" style="margin-top:5px; display:none;">Capture</a>
             <input type="hidden" name="webcamimg" id="webcamimg" value="">
-            <input type="file" id="selectimage" onchange="readURL(this);" style="border: 0; padding: 0; padding-top: 10px;" name="img" class="form-control-file">
+            <input type="file" id="selectimage" onchange="readURL(this);" style="border: 0; padding: 0; padding-top: 10px;" multiple name="img" class="form-control-file">
         </div>
         
     </div>
@@ -145,8 +148,12 @@
 {% endblock body %}
 
 {% block scripts %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap-tagsinput.min.js' %}"></script>
     <script src="{% static 'main.js' %}"></script>
     <script src="../static/registration.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'val.js' %}"></script>
+    <!-- <script src="{% static 'js/jquery-validation/dist/jquery-validate.js' %}"></script>
+    <script src="{% static 'js/jquery-validation/dist/additional-methods.js' %}"></script> -->
+    <script src="{% static 'js/sweet-alert/sweet-alert.min.js' %}"></script>
 {% endblock scripts %}

@@ -7,7 +7,7 @@ def adminOnly(view_function):
     def wrapperFun(request, *args, **kwargs):
         if request.user.is_superuser:
             return view_function(request, *args, **kwargs)
-        elif request.user.is_staff:
+        elif request.user.is_staff or request.user.is_active:
             return redirect('subadmin')
         else:
             return redirect('userlogin')

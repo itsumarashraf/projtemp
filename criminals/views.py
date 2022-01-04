@@ -4,6 +4,7 @@ from .form import *
 from django.http import HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
 from .models  import *
+from criminals.locationmodel import *
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
@@ -14,83 +15,91 @@ import base64
 import io
 from PIL import Image
 from django.core.files.base import ContentFile
+from .functions import *
 
 
 @adminOnly
 # @permission_required('criminals.delete_crime')
 def home(request):
-    criminals= criminal.objects.all()
-    return render(request,'index.html')
+    count=criminal.objects.all().count()
+    pending=criminal.objects.filter(pending=True).count()
+    jailed=criminal.objects.filter(imprisioned=True).count()
+    free=criminal.objects.filter(imprisioned=False).count()
+    return render(request,'index.html',{'total':count,'pending':pending,'imprisioned':jailed,'free':free})
 
 @adminOnly
 def viewcriminals(request):
-    criminals= criminal.objects.all()
+    criminals= criminal.objects.filter(deleted=False)
     return render(request,'viewcriminals.html',{'criminal':criminals})
 
 @csrf_exempt
 @adminOnly
 def addcriminal(request):
-    # criminal_form = CriminalForm(request.POST or None, request.FILES or None)
-    # crime_form = CrimeForm(request.POST or None, request.FILES or None)
-    # doc_form = DocumentsForm(request.POST or None, request.FILES or None)
-    # if criminal_form.is_valid():
-    #     criminal_form.save()
 
     if request.method=="POST":
-        # fname=request.POST.get('fname')
-        # lname=request.POST.get('lname')
-        # email=request.POST.get('email')
-        # phone=request.POST.get('phone')
-        # height=request.POST.get('height')
-        # gender=address=request.POST.get('gender')
-        # martialstatus=request.POST.get('martialstatus')
-        # address=request.POST.get('address')
-        # lang=request.POST.get('lang')
-        # identify=request.POST.get('identify')
-        # status=request.POST.get('status')
-        # dob=request.POST.get('dob')
+        fname=request.POST.get('fname')
+        lname=request.POST.get('lname')
+        gender=request.POST.get('gender')
+        martialstatus=request.POST.get('martialstatus')
+        dob=request.POST.get('dob')
+        tag=request.POST.get('tag')
+        address=request.POST
+        
+        if request.FILES.getlist('img'):
+            
+            user= criminal(fname=fname,lname=lname,dob=dob,martial_status=martialstatus,gender=gender)
+            user.save()
+            # saves address of user
+            saveaddress(user,address)
+            
+            criminal.addtags(user,tag)
+            for pic in request.FILES.getlist('img'):
+                criminalImages.objects.create(criminal=user,image=pic)
 
-        file = request.FILES.get('img')
-        if file:
-            # print('picture uploaded successfully')
-            print(request.FILES)
-            # fs = FileSystemStorage()
-            # filename = fs.save(file.name, file)
-            # print('filename is ',filename)
-            # url = fs.url(filename)
-            # print(url)
+                
+        elif request.POST.get('webcam'):
+            user= criminal(fname=fname,lname=lname,dob=dob,martial_status=martialstatus,gender=gender)
+            user.save()
+            data=request.POST.get('webcam')
+            imagecode=json.loads(data)
+            for image in imagecode:
+                format, imgstr = image.split(';base64,')
+                ext = format.split('/')[-1]
+                print('extension is  :',ext)
+                data = ContentFile(base64.b64decode(imgstr), name='webcamimage.'+ ext)
+                
+                criminalImages.objects.create(criminal=user,image=data)
             
-            # user= criminal(fname=fname,lname=lname,email=email,contact_no=phone,dob=dob,height=height,
-            # language=lang,martial_status=martialstatus,residence=address,status=status,
-            # identification=identify,sex=gender,profile_pic=filename)
-            # user.save()
+            # saves tags for a user
+            criminal.addtags(user,tag)
+            # saves addres of user
+            saveaddress(user,address)
+            
         else:
-            data=request.POST.get('webcamimg')
-            print('this will be the webcam image : ', request.FILES.get('webcaming'))
-            format, imgstr = data.split(';base64,')
-            ext = format.split('/')[-1]
-            print('extension is  :',ext)
-            data = ContentFile(base64.b64decode(imgstr), name='webcamimage.'+ ext)
-            
-            # user= criminal(fname=fname,lname=lname,email=email,contact_no=phone,dob=dob,height=height,
-            # language=lang,martial_status=martialstatus,residence=address,status=status,
-            # identification=identify,sex=gender,profile_pic=data)
-            # user.save()
+            if request.POST.get('zipp'):
+                zipp=request.POST.get('zipp')
+                data=getaddressdetails(zipp)
+                return HttpResponse(json.dumps(data))
+                    
         
     return render(request,'addcriminal.html')
 
+
 @adminOnly
 def viewcriminal(request,id):
-    criminals=criminal.objects.get(id=id)
-    return render(request,'criminal.html',{'criminal':criminals})
+    cri=criminal.getcriminal(id)
+    return render(request,'criminal.html',{'criminal':cri})
 
-@csrf_exempt
-def docs(request,id):
-    crim=criminal.objects.get(id=id)
-    dform=DocumentsForm(request.POST or None, request.FILES or None)
-    if dform.is_valid():
-        dform.save()
-    return render(request,'viewdocs.html',{'criminal':crim,'form':dform})
+
+def uploaddocuments(request,id):
+    if request.method=="POST":
+        document = request.FILES.getlist('docs')
+        cri=criminal.objects.get(id=id)
+        for doc in document:
+            documents.objects.create(criminal=cri,documentname=request.POST.get('docname'), attachment=doc)
+        
+    doc=documents.objects.filter(criminal__id=id)
+    return render(request,'uploaddocs.html',{'document':doc})
 
 @adminOnly
 def addcrime(request,id):
@@ -104,30 +113,27 @@ def addcrime(request,id):
 @adminOnly
 def editcriminal(request,id):
     person=criminal.objects.get(id=id)
-    cform=CriminalForm(request.POST or None, request.FILES or None,instance=person)
-    if cform.is_valid():
-        cform.save()
-
-    return render(request,'editcriminal.html',{'cform':cform})
-
-@adminOnly
-def updateprofile(request,id):
-    return render(request,'updateprofile.html')
+    if request.method=='POST':
+        print(request.POST)
+    return render(request,'editcriminal.html',{'person':person})
 
 
 def userlogin(request):
-    if request.method=="POST":
-        uname=request.POST.get('uname')
-        password=request.POST.get('password')
-        user=authenticate(request,username=uname,password=password)
-        if user is not None:
-            login(request,user)
-            return redirect('home')
-        
-        msg='Incorrect Username or Password'
-        return render(request,'userlogin.html',{'msg':msg})
-        
-    return render(request,'userlogin.html')
+    if not request.user.is_authenticated:
+        if request.method=="POST":
+            uname=request.POST.get('uname')
+            password=request.POST.get('password')
+            user=authenticate(request,username=uname,password=password)
+            if user is not None:
+                login(request,user)
+                return redirect('home')
+            
+            msg='Incorrect Username or Password'
+            return render(request,'userlogin.html',{'msg':msg})
+            
+        return render(request,'userlogin.html')
+    else:
+        return redirect('home')
 
 
 def userlogout(request):
@@ -143,19 +149,47 @@ def register(request):
     return render(request,'register.html',{'form':form})
 
 
-def criminalvideo(request,id):
-    print(id)
-    try:
-        vid =webvideo.objects.filter(criminal=id)
-    except:
-        vid =id
+def criminalvid(request,id):
+    vid =criminalvideo.objects.filter(criminal=id)
+    cri=criminal.objects.get(id=id)
+    if request.method=="POST":
+        for video in request.FILES.getlist('videos'):
+            criminalvideo.objects.create(criminal=cri,vidname=video)
     return render(request,'video.html',{'umar':vid})
 
 
 @csrf_exempt
 def recordvideo(request,id):
     crim=criminal.objects.get(id=id)
-    # if request.method=='POST':
-    #     webvideo.objects.create(criminal=crim, vidname=request.FILES.get('file'))
+    if request.method=='POST':
+        criminalvideo.objects.create(criminal=crim, vidname=request.FILES.get('file'))
     return render(request, 'recordvideo.html',{'criminal':crim})
-    
+
+def pendingcases(request):
+    cri = criminal.objects.filter(pending=1)
+    print(cri)
+    return render(request,'pendingcases.html',{'criminal':cri})
+
+def filterbytag(request,tslug):
+    search = criminal.objects.filter(tags__slug=tslug)
+    return render(request,'filterbytag.html',{'search':search})
+
+def veiwtrashcriminals(request):
+    criminals= criminal.objects.filter(deleted=True)
+    return render(request,'trash.html',{'criminal':criminals})
+
+def trashcriminal(request,id):
+    search = criminal.objects.get(id=id)
+    search.deleted=True
+    search.save()
+    return redirect('viewcriminals')
+
+def permemantdelete(request,id):
+    search = criminal.objects.get(id=id).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                    
+def restore(request,id):
+    search=criminal.objects.get(id=id)
+    search.deleted=False
+    search.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

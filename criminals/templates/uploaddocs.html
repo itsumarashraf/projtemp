@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %} Criminal Records {%endblock title%}
+
+{% block links %}
+<!-- <link rel="stylesheet" href="{% static 'bootstrapiso.css' %}"> -->
+
+{% endblock links %}
+  
+{%block body%}
+<style>
+    .uploaddocs{
+    display: flex;
+    height: 70vh;
+    flex-direction: column;
+    justify-content: center;
+}
+
+  input, select {
+  padding-left: 0 !important;
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+  input[type=file]::file-selector-button {
+  border: 2px solid #6c5ce7;
+  padding: 5px;
+  border-radius: .2em;
+  background-color: #4da5ff;
+  transition: 1s;
+  color: white;
+}
+
+</style>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-10">
+          {% if request.user.is_superuser or request.user.is_staff %}
+          <form class="form-inline" action="" method="post" enctype="multipart/form-data" style="margin-bottom:20px;">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="docname" id="docname" placeholder="Name or Type of Document.." class="form-control">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="file" multiple name="docs" id="formFile">
+            </div>
+            <button type="submit" class="btn  btn-default">Submit</button>
+        </form>
+          {% endif %}
+            <table class="table table-bordered table-striped">
+                <colgroup>
+                  <col class="col-xs-1">
+                  <col class="col-xs-7">
+                </colgroup>
+            <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for doc in document %}
+                <tr>
+                  <th scope="row">
+                    <i class="fa fa-file-text-o fa-2x" style="color: rgb(24, 134, 243);" aria-hidden="true"></i>
+                  </th>
+                  <td style="font-size: 15px;">{{doc.documentname |capfirst}}</td>
+                  <td><a href="{{doc.attachment.url}}"><i class="fa fa-download fa-2x" style="margin-right: 5px;" aria-hidden="true"></i></a>
+                    <a href=""><i class="fa fa-trash fa-2x" style="margin-left: 5px;" aria-hidden="true"></i></a>
+                </td>
+                </tr>
+                {% endfor %}    
+              </tbody>
+            </table>
+        </div>
+        
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% block scripts %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock scripts %}
+
+{%endblock body%}

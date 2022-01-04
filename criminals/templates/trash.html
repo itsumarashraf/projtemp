@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %} Criminal Records {%endblock title%}
+
+{% block links %}
+
+{% endblock links %}
+  
+
+
+{%block body%}
+
+<style>
+  .addrecord{
+    float: right;
+    margin-bottom:20px;
+  }
+  a .fa{
+    margin-right: 10px;
+  }
+</style>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-title">
+        Criminal Records
+      </div>
+      <div class="panel-body table-responsive">
+          <table id="example0" class="table display">
+              <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Address</th>
+                    <th>Gender</th>
+                    <th>Maritial Status</th>
+                    <th>Action</th>
+                  </tr>
+              </thead>
+           
+           
+              <tbody>
+                {% for c in criminal %}
+                {%for address in c.criminaladdress_set.all%}
+                  <tr>
+                    <td>{{c.fname}} {{c.lname}}</td>
+                    <td>{{c.code}}</td>
+                    <td>{{address.town}}, {{address.district}}</td>
+                    <td>{{c.gender}}</td>
+                    <td>{{c.martial_status}}</td>
+                    <td>
+                        <a href="{% url 'restore' c.id %}"><i class="fa fa-repeat" style="color: rgb(0, 115, 255); font-size: 25px;" aria-hidden="true"></i></a>
+                      <i onclick="confirm()" class="fa fa-trash" style="color: red; font-size: 25px;" aria-hidden="true"></i>
+                      <a id="confirm" hidden  href="{% url 'permemantdelete' c.id %}"></a>
+                    </td>
+                  </tr> 
+                  {% endfor %}
+                  {% endfor %}
+              </tbody>
+          </table>
+          
+          <script>
+            function confirm(){
+                
+              swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this Record!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete!",
+                cancelButtonText: "No, cancel!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+              },
+              function(isConfirm){
+                if (isConfirm) {
+                  swal("Deleted!", "Record has been deleted.", "success");
+                  document.getElementById('confirm').click();
+                } else {
+                  swal("Cancelled", "Delete cancled :)", "error");
+                  return false
+                }
+              });
+          
+            };
+          </script>
+
+      </div>
+
+    </div>
+ </div>
+
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+ <script>
+    $(document).ready(function() {
+        $('#example0').DataTable();
+    } );
+    </script>
+
+{% block scripts %}
+<script src="{% static 'js/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'js/sweet-alert/sweet-alert.min.js' %}"></script>
+{% endblock scripts %}
+ 
+{%endblock body%}
+

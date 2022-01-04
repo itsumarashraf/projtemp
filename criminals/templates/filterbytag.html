@@ -1,0 +1,107 @@
+
+{% extends 'base.html' %}
+{%block title %} Filter {%endblock title%}
+
+{% block links %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css">
+{% endblock links %}
+
+{% load static %}
+
+{%block body%}
+
+
+
+<style>
+  .addrecord{
+    float: right;
+    margin-bottom:20px;
+  }
+  a .fa{
+    margin-right: 10px;
+    font-size: 20px;
+  }
+ 
+</style>
+
+
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-title">
+        Criminal Records
+      </div>
+      <div class="panel-body table-responsive">
+          <table id="example0" class="table display">
+              <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Address</th>
+                    <th>Gender</th>
+                    <th>Maritial Status</th>
+                    <th>Action</th>
+                  </tr>
+              </thead>
+           
+           
+              <tbody>
+                {% for c in search %}
+                {%for address in c.criminaladdress_set.all%}
+                  <tr>
+                    <td>{{c.fname}} {{c.lname}}</td>
+                    <td>{{c.code}}</td>
+                    <td>{{address.town}}, {{address.district}}</td>
+                    <td>{{c.gender}}</td>
+                    <td>{{c.martial_status}}</td>
+                    <td>
+                      {% if request.user.is_superuser %}
+                      <a href="{% url 'viewcriminal' c.id %}""><i class="fa fa-sign-in" style="color: rgb(255, 166, 0);" aria-hidden="true"></i></a>
+                      <a href="{% url 'editcriminal' c.id %}"><i class="fa fa-pencil-square-o" style="color: rgb(22, 119, 238);" aria-hidden="true"></i></a>
+                      <a href="{% url 'trashcriminal' c.id %}"><i class="fa fa-trash" style="color: red;" aria-hidden="true"></i></a>
+                      {% else %}
+                      <a href="{% url 'profile' c.id %}""><i class="fa fa-sign-in" style="color: rgb(255, 166, 0);" aria-hidden="true"></i></a>
+                      {% endif %}
+                    </td>
+                  </tr> 
+                  {% endfor %}
+                  {% endfor %}
+              </tbody>
+          </table>
+
+
+      </div>
+
+    </div>
+ </div>
+
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+ <script>
+    $(document).ready(function() {
+        $('#example0').DataTable({
+          dom: 'Bfrtip',
+        buttons: [
+            'excel', 'pdf', 'print'
+        ]
+        });
+    } );
+
+    
+    </script>
+
+{% block scripts %}
+<script src="{% static 'js/datatables/datatablenew.js' %}"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
+{% endblock scripts %}
+ 
+
+{%endblock body%}
+
+
+

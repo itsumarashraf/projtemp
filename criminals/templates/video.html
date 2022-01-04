@@ -3,33 +3,64 @@
 {%block title %} Videos {%endblock title%}
 
 {% block links %}
-
+    
 {% endblock links %}
   
 
 
 {%block body%}
+
+
+
+<style>
+    input, select {
+  
+    padding-left: 0;
+    padding-bottom: 0;
     
+}
+input[type=file]::file-selector-button {
+  border: 2px solid #6c5ce7;
+  padding: 5px;
+  border-radius: .2em;
+  background-color: #756de9;
+  transition: 1s;
+  color: white;
+}
+</style>
+
     <div class="container">
         <div class="row">
-            <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-10 col-md-offset-1">
+            {% if request.user.is_superuser or request.user.is_staff %}
+            <form class="form-inline" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="file" name="videos" multiple id="" class=" custom-file-input">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn" style="background-color: #756de9;color: white;">Upload</button>
+                </div>
+              </form>
+              {% endif %}
+
             {% if umar %}
                 {% for umar in umar %}
-                <video width="320" height="240" controls>
+                <video width="220" height="140" controls>
                     <source src="{{umar.vidname.url}} type="video/mp4">
                     <source src="{{umar.vidname.url}}" type="video/ogg">
                 Your browser does not support the video tag.
                 </video>
                 {% endfor %}
             {% else %}
-                <div class="nodata" style=" height: 65vh;display: flex; justify-content: center;">
-                    <h3 style=" align-self: center;">No Videos Avaliable for This Person</h3>
+                <div class="nodata" style="min-height: 70vh; display: flex; justify-content: center;">
+                    <div style=" align-self: center;">
+                        <h3>No Videos Avaliable for This Person</h3>
+                    </div>
                 </div>
             {% endif %}
         </div>
-        <div class="col-md-2"></div>
-        </div>
+    </div>
     </div>
 
 
