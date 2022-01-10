@@ -8,10 +8,23 @@ from django.db import transaction
 def updateprofile(request,id):
     if request.method == "POST":
         data = request.POST
-        # seteducation(id,data)
+        seteducation(id,data)
         # setcommunications(id,data)
         # setmarriagedetails(id,data)
         # setfinancialdetails(id,data)
         # setmobilitydetails(id,data)
-        print(data)
+        
+        # setparentdetails(id,data)
+        # setgrandparentdetails(id,data)
+        # setbrotherdetails(id,data)
+        # setsisterdetails(id,data)
+        # setpaternaluncledetails(id,data)
+        # setpaternalauntdetails(id,data)
+        # setmaternaluncledetails(id,data)
+        # setmaternalauntdetails(id,data)
+        
+        # setmilitancydetails(id,data)
+        # setdetentiondetails(id,data)
+        # setinterrogatordetails(id,data)
+        # print(data)
     return render(request,'updateprofile.html')

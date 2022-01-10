@@ -35,7 +35,9 @@ def viewcriminals(request):
 @csrf_exempt
 @adminOnly
 def addcriminal(request):
-
+    ccategroy = criminalcategory.objects.all()
+    
+    
     if request.method=="POST":
         fname=request.POST.get('fname')
         lname=request.POST.get('lname')
@@ -44,10 +46,11 @@ def addcriminal(request):
         dob=request.POST.get('dob')
         tag=request.POST.get('tag')
         address=request.POST
-        
+        cid=request.POST.get('ccategory')
+        cc=criminalcategory.objects.get(id=cid)
         if request.FILES.getlist('img'):
             
-            user= criminal(fname=fname,lname=lname,dob=dob,martial_status=martialstatus,gender=gender)
+            user= criminal(category=cc,fname=fname,lname=lname,dob=dob,martial_status=martialstatus,gender=gender)
             user.save()
             # saves address of user
             saveaddress(user,address)
@@ -58,7 +61,7 @@ def addcriminal(request):
 
                 
         elif request.POST.get('webcam'):
-            user= criminal(fname=fname,lname=lname,dob=dob,martial_status=martialstatus,gender=gender)
+            user= criminal(category=cc,fname=fname,lname=lname,dob=dob,martial_status=martialstatus,gender=gender)
             user.save()
             data=request.POST.get('webcam')
             imagecode=json.loads(data)
@@ -82,7 +85,7 @@ def addcriminal(request):
                 return HttpResponse(json.dumps(data))
                     
         
-    return render(request,'addcriminal.html')
+    return render(request,'addcriminal.html',{'cc':ccategroy})
 
 
 @adminOnly

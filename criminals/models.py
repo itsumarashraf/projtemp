@@ -5,7 +5,14 @@ from django.utils import timezone
 from taggit.managers import TaggableManager
 import uuid
 
+class criminalcategory(models.Model):
+    categoryname = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.categoryname
+    
 class criminal(models.Model):
+    category = models.ForeignKey(criminalcategory, on_delete=models.SET_NULL, null=True)
     fname= models.CharField(max_length=50)
     lname= models.CharField(max_length=50)
     code= models.CharField(max_length=100, default = uuid.uuid4().hex[:6].upper())

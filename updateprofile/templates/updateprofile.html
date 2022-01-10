@@ -26,8 +26,194 @@
         <form action="" id="myfrm" method="post" enctype="multipart/form-data">
         {% csrf_token%}
         
+        <section>
+            <fieldset class="border">
+                <legend class="w-auto">Education</legend>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="school">School</label>
+                <input type="text" name="school" class="form-control" id="school">
+                </div>
+                <div class="form-group col-md-3">
+                <label for="fromyear">From</label>
+                <input type="date" name="schoolfrom" class="form-control" id="fromyear">
+                </div>
+                <div class="form-group col-md-3">
+                <label for="toyear">To</label>
+                <input type="date" name="schoolto" class="form-control" id="toyear">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="college">College</label>
+                <input type="text" name="collage" class="form-control" id="college">
+                </div>
+                <div class="form-group col-md-3">
+                <label for="collegefromyear">From</label>
+                <input type="date" name="collagefrom" class="form-control" id="collegefromyear">
+                </div>
+                <div class="form-group col-md-3">
+                <label for="collegetoyear">To</label>
+                <input type="date" name="collageto" class="form-control" id="collegetoyear">
+                </div>
+            </div>
+            </fieldset>
         
-
+            <fieldset class="border p-3">
+                <legend class="w-auto">Communications</legend>
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                <label for="phone">Phone</label>
+                <input type="Phone" name="phone" class="form-control" id="phone" required placeholder="Phone..">
+                </div>
+                <div class="form-group col-md-4">
+                <label for="landline">Landline</label>
+                <input type="phone" name="landline" class="form-control" id="landline" placeholder="Landline">
+                </div>
+                <div class="form-group col-md-4">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Email..">
+                </div>
+            </div>
+            </fieldset>
+        
+            <fieldset class="border p-3">
+                <legend class="w-auto">Marriage</legend>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <div class="row">
+                            <label for="">Person is Married?</label>
+                        </div>
+                        <div class="form-group mb-1">          
+                            <div class="radio radio-danger radio-inline">
+                                <input type="radio" onclick="criminalismarried()" id="married" value="yes" name="married"checked>
+                                <label for="married"> Yes </label>
+                            </div>
+                            <div class="radio radio-danger radio-inline">
+                                <input type="radio" onclick="criminalismarried()" id="notmarried" value="no" name="married">
+                                <label for="notmarried"> No </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="marriagedetailsection">
+                    <div class="marriagedetails">
+                        <fieldset class="border p-3">
+                            <div class="form-row">
+                                <div class="form-group col-md-5">
+                                <label for="spouse">Spouse</label>
+                                <input type="text" name="spousename" class="form-control" id="spouse">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="spousedo">Daughter of</label>
+                                    <input type="text" name="spousefather" class="form-control" id="spousedo">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="spouseoccupation">Occupation</label>
+                                    <input type="text" name="spouseoccupaion" class="form-control" id="spouseoccupation">
+                                </div>
+                            </div>
+                    
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="spouseaddress">Address</label>
+                                    <input type="text" name="spouseaddress" class="form-control" id="spouseaddress">
+                                </div>
+                                <div class="form-group col-md-3">
+                                <label for="spouseage">Age</label>
+                                <input type="text" name="spouseage" class="form-control" id="spouseage">
+                                </div>
+                                <div class="form-group col-md-3">
+                                <label for="spousephone">Phone</label>
+                                <input type="phone" name="spousephone" class="form-control" id="spousephone">
+                                </div>
+                            </div>
+                        </fieldset>
+        
+                        <fieldset class="border p-3">
+                            <div class="kidwrapper row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                        <label for="kid">Son/Daughter</label>
+                                        <input type="text" name="kidname" class="form-control" id="kid">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="kidsoccupation">Occupation</label>
+                                        <input type="text" name="kidoccupation" class="form-control" id="kidsoccupation">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                    <label for="kidsage">Age</label>
+                                    <input type="text" name="kidage" class="form-control" id="kidsage">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                    <label for="kidsphone">Phone</label>
+                                    <input type="phone" name="kidphone" class="form-control" id="kidsphone">
+                                    </div>
+                                </div>
+        
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                    <label for="kidschool">School</label>
+                                    <input type="text" name="kidschool" class="form-control" id="kidschool" placeholder="School.">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                    <label for="kidcollege">College</label>
+                                    <input type="text" name="kidcollage" class="form-control" id="kidcollege" placeholder="college">
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="btn btn-sm btn-danger float-right" onclick="addchild()"> Add Child</a>
+                        </fieldset>
+                    </div> 
+                </div>  
+                <!-- *********marriage details ends here*********** -->
+            </fieldset>
+        <!-- ************************ MARRIAGE SECTION ENDS HERE ********************************** -->
+        
+        <fieldset class="border p-3">
+            <legend class w-auto>Financial Status</legend>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="incomesource">Income Source</label>
+                    <input type="text" name="incomesourse" class="form-control" id="incomesource">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="monthlyexpenses">Monthly Expenses</label>
+                    <input type="text" name="monthlyincome" class="form-control" id="monthlyexpenses">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="property">Property</label>
+                    <input type="text" name="property" class="form-control" id="property">
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="border p-3">
+            <legend class w-auto>Mobility</legend>
+            <div class="mobility form-row">
+                <div class="form-group col-md-5">
+                    <label for="vehical">Vehical Owned</label>
+                    <input type="text" name="vehicalname" class="form-control" id="vehical">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="vehicaltype">Type</label>
+                    <select class="form-control" id="vehicaltype" name='vehicaltype'>
+                    <option value="car">Car</option>
+                    <option value="bike">Bike</option>
+                    <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="property">Registraion No</label>
+                    <input type="text" name="vehicalregno" class="form-control" id="registration">
+                </div>
+            </div>
+            <a class="btn btn-sm btn-danger float-right" onclick="addvehical()">Add More</a>
+        </fieldset>
+        
+        </section>
+        
         <section>
             <fieldset class="border p-3 ">
                 <legend class="w-auto">Family Details</legend>
@@ -61,137 +247,103 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="mdaughterof">Daughter Of</label>
-                            <input type="text" name="parentaluncle" class="form-control" id="mdaughterof">
+                            <input type="text" name="muncle" class="form-control" id="mdaughterof">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="motherphone">Phone</label>
-                            <input type="phone" name="parentalunclephone" class="form-control" id="motherphone">
+                            <input type="phone" name="munclephone" class="form-control" id="motherphone">
                         </div>
                     </div>
                 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="occupationaddress">Occupation Address</label>
-                            <input type="text" name="parentaluncleoccupationaladdress" class="form-control" id="occupationaddress">
+                            <input type="text" name="muncleoccupationaladdress" class="form-control" id="occupationaddress">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="maddress">Residential Address</label>
-                            <input type="text" name="parenteruncleaddress" class="form-control" id="maddress">
+                            <input type="text" name="muncleaddress" class="form-control" id="maddress">
                         </div>
                     </div>
                 </fieldset>
                  <!-- **********************father mother details ends here *********************************** -->
         
                  <fieldset class="border p-3">
-                    <div id="brotherdetails1" class="bd_sample" style="display: none;">
-                        <div class="brothers">
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="brother">Brother's Name</label>
-                                    <input type="text" name="brother" class="form-control" id="brother">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="brotherage">Age</label>
-                                    <input type="date" name="brotherage" class="form-control" id="brotherage">
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="brotherphone">Phone</label>
-                                    <input type="phone" name="brotherphone" class="form-control" id="brotherphone">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="brotheroccupation">Occupation</label>
-                                    <input type="text" name="brotheroccupation" class="form-control" id="brotheroccupation">
-                                </div>
-                            </div>
-
-                            <div class="brothersfamilydetails">
-                                <div>
-                                    <input class="fl brothermarried" name="brothermarried"  style="width: 20px; margin-bottom: 0 !important;" type="checkbox" >
-                                    <label class="" for="fl">is married</label>
-                                    <a class="btn btn-sm btn-danger removebrother" style="margin: 5px; float: right;">Remove</a>
-                                </div>
-                                <div class="brothersfamily" style="display:none">
-                                    <div class="brotherspouse">
-                                        <fieldset class="border p-3">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-4">
-                                                    <label for="brotherswifename">Spouse Name</label>
-                                                    <input type="text" name="brotherswifename" class="form-control" id="brotherswifename">
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="brotherswifeage">Age</label>
-                                                    <input type="date" name="brotherswifeage" class="form-control" id="brotherswifeage">
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="brotherswifephone">Phone</label>
-                                                    <input type="phone" name="brotherswifephone" class="form-control" id="brotherswifephone">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="brotherswifefather">Daughter Of</label>
-                                                    <input type="text" name="brotherswifefather" class="form-control" id="brotherswifefather">
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="brotherswifeaddress">Address</label>
-                                                    <input type="text" name="brotherswifeaddress" class="form-control" id="brotherswifeaddress">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="brotherswifeoccupation">Occupation</label>
-                                                    <input type="text" name="brotherswifeoccupation" class="form-control" id="brotherswifeoccupation">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                    
-                                    <div class="brotherkids">
-                                        <fieldset class="border p-3">
-                                            <div id="brotherkid">
-                                                <div class="brotherkidwrapper">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-5">
-                                                            <label for="brotherskid">Son/Daughter</label>
-                                                            <input type="text" name="brotherskid" class="form-control" id="brotherskid">
-                                                        </div>
-                                                        <div class="form-group col-md-3">
-                                                            <label for="kidoccupation">Occupation</label>
-                                                            <input type="text" name="brotherskidoccupation" class="form-control" id="brotherskidoccupation">
-                                                        </div>
-                                                        <div class="form-group col-md-2">
-                                                            <label for="brotherskidage">Age</label>
-                                                            <input type="text" name="brotherskidage" class="form-control" id="brotherskidage">
-                                                        </div>
-                                                        <div class="form-group col-md-2">
-                                                            <label for="brotherskidphone">Phone</label>
-                                                            <input type="phone" name="brotherskidphone" class="form-control" id="brotherskidphone">
-                                                        </div>
-                                                    </div>
-                                    
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="brotherskidschool">School</label>
-                                                            <input type="text" name="brotherskidschool" class="form-control" id="brotherskidschool" placeholder="School.">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="brotherskidcollege">College</label>
-                                                            <input type="text" name="brotherskidcollege" class="form-control" id="brotherskidcollege" placeholder="college">
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <a class="btn btn-sm btn-danger removebrotherkid" style="margin: 5px; float: right;">Remove</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="bmorekids"></div>
-                                            <a class="btn btn-sm btn-danger float-right brotherchildadd"> Add Child</a>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="pgfather">Paternal Grandfather's Name</label>
+                            <input type="text" name="pgfather" class="form-control" id="pgfather">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pgfatheraddress">Address</label>
+                            <input type="text" name="pgfatheraddress" class="form-control" id="pgfatheraddress">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pgfatherphone">Phone</label>
+                            <input type="phone" name="pgfatherphone" class="form-control" id="pgfatherphone">
                         </div>
                     </div>
-
-
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="pgmother">Paternal Grandmother's Name</label>
+                            <input type="text" name="pgmothername" class="form-control" id="pggrandmother">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pgmotherdo">Daughter Of</label>
+                            <input type="text" name="pguncle" class="form-control" id="pgmotherdo">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="pgmotheraddress">Address</label>
+                            <input type="text" name="pgmotheraddress" class="form-control" id="pgmotheraddress">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="pgmotherphone">Phone</label>
+                            <input type="phone" name="pgmotherphone" class="form-control" id="pgmotherphone">
+                        </div>
+                    </div>
+                
+                </fieldset>
+                <!-- **********************paternal father mother details ends here *********************************** -->
+        
+                <fieldset class="border p-3">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="mgfather">Maternal Grandfather's Name</label>
+                            <input type="text" name="mgfather" class="form-control" id="mgfather">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="mgfatheraddress">Address</label>
+                            <input type="text" name="mgfatheraddress" class="form-control" id="mgfatheraddress">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="mgfatherphone">Phone</label>
+                            <input type="phone" name="mgfatherphone" class="form-control" id="mgfatherphone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="mgmother">Maternal Grandmother's Name</label>
+                            <input type="text" name="maternalmothername" class="form-control" id="mgfather">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="mgmotherdo">Daughter Of</label>
+                            <input type="text" name="mguncle" class="form-control" id="mgmotherdo">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="mgmotheraddress">Address</label>
+                            <input type="text" name="mgmotheraddress" class="form-control" id="mgmotheraddress">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="mgmotherphone">Phone</label>
+                            <input type="phone" name="mgmotherphone" class="form-control" id="mgmotherphone">
+                        </div>
+                    </div>
+                
+                </fieldset>
+                <!-- **********************maternal father mother details ends here *********************************** -->
+        
+                 <fieldset class="border p-3">
+                
                     <div id="brotherdetails">
                         <div class="brothers">
                             <div class="form-row">
@@ -212,11 +364,11 @@
                                     <input type="text" name="brotheroccupation" class="form-control" id="brotheroccupation">
                                 </div>
                             </div>
-
+        
                             <div class="brothersfamilydetails">
-                                <div>
+                                <div class="form-row">
                                     <input class="fl brothermarried" name="brothermarried"  style="width: 20px; margin-bottom: 0 !important;" type="checkbox" >
-                                    <label class="" for="fl">is married</label>
+                                    <label class="">is married</label>
                                 </div>
                                 <div class="brothersfamily" style="display:none">
                                     <div class="brotherspouse">
@@ -224,29 +376,29 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
                                                     <label for="brotherswifename">Spouse Name</label>
-                                                    <input type="text" name="brotherswifename" class="form-control" id="brotherswifename">
+                                                    <input type="text" name="brotherswifename" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <label for="brotherswifeage">Age</label>
-                                                    <input type="date" name="brotherswifeage" class="form-control" id="brotherswifeage">
+                                                    <input type="text" name="brotherswifeage" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <label for="brotherswifephone">Phone</label>
-                                                    <input type="phone" name="brotherswifephone" class="form-control" id="brotherswifephone">
+                                                    <input type="phone" name="brotherswifephone" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="brotherswifefather">Daughter Of</label>
-                                                    <input type="text" name="brotherswifefather" class="form-control" id="brotherswifefather">
+                                                    <input type="text" name="brotherswifefather" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label for="brotherswifeaddress">Address</label>
-                                                    <input type="text" name="brotherswifeaddress" class="form-control" id="brotherswifeaddress">
+                                                    <input type="text" name="brotherswifeaddress" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="brotherswifeoccupation">Occupation</label>
-                                                    <input type="text" name="brotherswifeoccupation" class="form-control" id="brotherswifeoccupation">
+                                                    <input type="text" name="brotherswifeoccupation" class="form-control">
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -307,240 +459,681 @@
         
         
                  <fieldset class="border p-3">
-                    <div class="sisterdetails">
+                    
+        
+                    <div id="sisterdetails">
+                        <div class="sisterwrapper">
                         <div class="sisters">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="sister">Sister's Name</label>
-                                    <input type="text" class="form-control" id="sister">
+                                    <input type="text" class="form-control" name="sister">
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="sisterage">Age</label>
-                                    <input type="date" class="form-control" id="sisterage">
+                                    <input type="date" class="form-control" name="sisterage">
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="sisterphone">Phone</label>
-                                    <input type="phone" class="form-control" id="sisterphone">
+                                    <input type="phone" class="form-control" name="sisterphone">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="sisteroccupation">Occupation</label>
-                                    <input type="text" class="form-control" id="sisteroccupation">
+                                    <input type="text" class="form-control" name="sisteroccupation">
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col">
-                                    <a class="btn btn-sm btn-danger float-right" id="sisters"> Add Sisters</a>
-                                </div>
+                        
+                            
+                            <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+                                <input class="sistermarried" type="checkbox" >
+                                <label for="checkbox1">
+                                    is she married
+                                </label>
                             </div>
-                        </div>
+                        
         
+                        </div>
+                       
+                        <div class="sisterfamily" style="display: none;">
+                            <div class="sisterspouse">
+                                <fieldset class="border p-3">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="sistersspousename">Spouse Name</label>
+                                            <input type="text" class="form-control" name="sistersspousename">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="sistersspouseage">Age</label>
+                                            <input type="text" class="form-control" name="sistersspouseage">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="sistersspousephone">Phone</label>
+                                            <input type="phone" class="form-control" name="sistersspousephone">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="sisterspuosefather">Son Of</label>
+                                            <input type="text" class="form-control" name="sisterspousefather">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="sistersspouseaddress">Address</label>
+                                            <input type="text" class="form-control" name="sisterspouseaddress">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="sistersspouseoccupation">Occupation</label>
+                                            <input type="text" class="form-control" name="sistersspouseoccupation">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            
+                            
+                                <fieldset class="border p-3">
+                                    <div id="sisterkids">
+                                    <div class="sisterkidwrapper">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-5">
+                                                <label for="sisterskid">Son/Daughter</label>
+                                                <input type="text" class="form-control" name="sisterkid">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="sisterskidoccupation">Occupation</label>
+                                                <input type="text" class="form-control" name="sisterskidoccupation">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="sisterskidage">Age</label>
+                                                <input type="text" class="form-control" name="sistersskidage">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="sisterskidphone">Phone</label>
+                                                <input type="phone" class="form-control" name="sistersskidphone">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="sisterskidschool">School</label>
+                                                <input type="text" class="form-control" name="sisterskidschool" placeholder="School.">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="sisterskidcollege">College</label>
+                                                <input type="text" class="form-control" name="sisterskidcollege" placeholder="college">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="moresisterkids"></div>
+                                    <a class="btn btn-sm btn-danger float-right addsisterskid"> Add Child</a>
+                                </fieldset>
+                            
+                        </div>
+                    </div>
+                    </div>
+                    <div class="moresisters"></div>
                         <div class="form-row">
                             <div class="form-group col">
-                                <div class="row">
-                                    <label for="">Is She Married?</label>
-                                </div>
-                                <div class="form-group mb-1">          
-                                    <div class="radio radio-danger radio-inline">
-                                        <input type="radio" id="sistermarried" name="sistermarried" value="yes" checked>
-                                        <label for="sistermarried"> Yes </label>
-                                    </div>
-                                    <div class="radio radio-danger radio-inline">
-                                        <input type="radio" id="sisternotmarried" name="sistermarried" value="no">
-                                        <label for="sisternotmarried"> No </label>
-                                    </div>
-                                  </div>
+                                <a class="btn btn-sm btn-danger float-right addsister" > Add Sisters</a>
                             </div>
                         </div>
-        
-                        <div class="sisterspouse">
-                            <fieldset class="border p-3">
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="sistersspousename">Spouse Name</label>
-                                        <input type="text" class="form-control" id="sistersspousename">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="brotherswifeage">Age</label>
-                                        <input type="date" class="form-control" id="brotherswifeage">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="brotherswifephone">Phone</label>
-                                        <input type="phone" class="form-control" id="brotherswifephone">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="sisterspuosefather">Son Of</label>
-                                        <input type="text" class="form-control" id="sisterspousefather">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="sistersspouseaddress">Address</label>
-                                        <input type="text" class="form-control" id="brotherswifeaddress">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="sistersspouseoccupation">Occupation</label>
-                                        <input type="text" class="form-control" id="sistersspouseoccupation">
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        
-                        <div class="sisterkids">
-                            <fieldset class="border p-3">
-                                <div class="form-row">
-                                    <div class="form-group col-md-5">
-                                        <label for="sisterskid">Son/Daughter</label>
-                                        <input type="text" class="form-control" id="bsisterkid">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="sisterskidoccupation">Occupation</label>
-                                        <input type="text" class="form-control" id="sisterskidoccupation">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="sisterskidage">Age</label>
-                                        <input type="text" class="form-control" id="sistersskidage">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="sisterskidphone">Phone</label>
-                                        <input type="phone" class="form-control" id="sistersskidphone">
-                                    </div>
-                                </div>
-                
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="sisterskidschool">School</label>
-                                        <input type="text" class="form-control" id="sisterskidschool" placeholder="School.">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="sisterskidcollege">College</label>
-                                        <input type="text" class="form-control" id="sisterskidcollege" placeholder="college">
-                                    </div>
-                                </div>
-                                <a class="btn btn-sm btn-danger float-right" id="sisterskid"> Add Child</a>
-                            </fieldset>
-                        </div>
-        
-                    </div>
                  </fieldset>
         
                         <!-- **************************** sisterts details ends here ********************* -->
         
                         <fieldset class="border p-3">
-                            <div class="PaternalUncledetails">
+        
+                            <div id="paternaluncledetails">
+                                <div class="paternalunclewrapper">
                                 <div class="paternaluncle">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="paternaluncle">Paternal Uncle's Name</label>
-                                            <input type="text" class="form-control" id="paternaluncle">
+                                            <input type="text" class="form-control" name="paternalunclename">
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="paternaluncleage">Age</label>
-                                            <input type="date" class="form-control" id="paternaluncleage">
+                                            <input type="date" class="form-control" name="paternaluncleage">
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="paternalunclephone">Phone</label>
-                                            <input type="phone" class="form-control" id="paternalunclephone">
+                                            <input type="phone" class="form-control" name="paternalunclephone">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="paternaluncleoccupation">Occupation</label>
-                                            <input type="text" class="form-control" id="paternaluncleoccupation">
+                                            <input type="text" class="form-control" name="paternaluncleoccupation">
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-group col">
-                                            <a class="btn btn-sm btn-danger float-right" id="paternaluncle"> Add Paternal Uncle</a>
-                                        </div>
+                                
+                                    
+                                    <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+                                        <input class="paternalunclemarried" type="checkbox" >
+                                        <label for="checkbox1">
+                                            Is He Married?
+                                        </label>
                                     </div>
                                 </div>
-                
+                               
+                                <div class="paternalunclefamily" style="display: none;">
+                                    <div class="paternalunclespouse">
+                                        <fieldset class="border p-3">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="paternalunclespousename">Spouse Name</label>
+                                                    <input type="text" class="form-control" name="paternalunclespousename">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="paternalunclespouseage">Age</label>
+                                                    <input type="text" class="form-control" name="paternalunclespouseage">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="paternalunclespousephone">Phone</label>
+                                                    <input type="phone" class="form-control" name="paternalunclespousephone">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="paternalunclespuosefather">Daughter Of</label>
+                                                    <input type="text" class="form-control" name="paternalunclespousefather">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="paternalunclespouseaddress">Address</label>
+                                                    <input type="text" class="form-control" name="paternalunclespouseaddress">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="paternalunclespoueoccupation">Occupation</label>
+                                                    <input type="text" class="form-control" name="paternalunclespousefatheroccupation">
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    
+                                    
+                                        <fieldset class="border p-3">
+                                            <div id="paternalunclekids">
+                                            <div class="paternalunclekidwrapper">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-5">
+                                                        <label for="sisterskid">Son/Daughter</label>
+                                                        <input type="text" class="form-control" name="paternalunclekid">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="sisterskidoccupation">Occupation</label>
+                                                        <input type="text" class="form-control" name="paternalunclekidoccupation">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="sisterskidage">Age</label>
+                                                        <input type="text" class="form-control" name="paternalunclekidage">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="sisterskidphone">Phone</label>
+                                                        <input type="phone" class="form-control" name="paternalunclekidphone">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="sisterskidschool">School</label>
+                                                        <input type="text" class="form-control" name="paternalunclekidschool" placeholder="School.">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="sisterskidcollege">College</label>
+                                                        <input type="text" class="form-control" name="paternalunclekidcollege" placeholder="college">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="morepaternalunclekids"></div>
+                                            <a class="btn btn-sm btn-danger float-right addpaternalunclekid"> Add Child</a>
+                                        </fieldset>
+                                    
+                                </div>
+                            </div>
+                            </div>
+                            <div class="morepaternaluncles"></div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <div class="row">
-                                            <label for="">Is He Married?</label>
-                                        </div>
-                                        <div class="form-group mb-1">          
-                                            <div class="radio radio-danger radio-inline">
-                                                <input type="radio" id="paternalunclemarried" name="paternalunclemarried" value="yes" checked>
-                                                <label for="paternalunclemarried"> Yes </label>
-                                            </div>
-                                            <div class="radio radio-danger radio-inline">
-                                                <input type="radio" id="paternalunclenotmarried" name="paternalunclemarried" value="no">
-                                                <label for="paternalunclenotmarried"> No </label>
-                                            </div>
-                                          </div>
+                                        <a class="btn btn-sm btn-danger float-right addpaternaluncle" > Add Paternal Uncle</a>
                                     </div>
                                 </div>
-                
-                                <div class="paternalunclespouse">
-                                    <fieldset class="border p-3">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-4">
-                                                <label for="paternalunclespousename">Spouse Name</label>
-                                                <input type="text" class="form-control" id="paternalunclespousename">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="paternalunclespouseage">Age</label>
-                                                <input type="date" class="form-control" id="paternalunclespouseage">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="paternalunclespousephone">Phone</label>
-                                                <input type="phone" class="form-control" id="paternalunclespousephone">
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label for="paternalunclespuosefather">Daughter Of</label>
-                                                <input type="text" class="form-control" id="paternalunclespousefather">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="paternalunclespouseaddress">Address</label>
-                                                <input type="text" class="form-control" id="paternalunclespouseaddress">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="paternalunclespoueoccupation">Occupation</label>
-                                                <input type="text" class="form-control" id="paternaluncleoccupation">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                
-                                <div class="sisterkids">
-                                    <fieldset class="border p-3">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="sisterskid">Son/Daughter</label>
-                                                <input type="text" class="form-control" id="bsisterkid">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="sisterskidoccupation">Occupation</label>
-                                                <input type="text" class="form-control" id="sisterskidoccupation">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="sisterskidage">Age</label>
-                                                <input type="text" class="form-control" id="sistersskidage">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="sisterskidphone">Phone</label>
-                                                <input type="phone" class="form-control" id="sistersskidphone">
-                                            </div>
-                                        </div>
-                        
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="sisterskidschool">School</label>
-                                                <input type="text" class="form-control" id="sisterskidschool" placeholder="School.">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="sisterskidcollege">College</label>
-                                                <input type="text" class="form-control" id="sisterskidcollege" placeholder="college">
-                                            </div>
-                                        </div>
-                                        <a class="btn btn-sm btn-danger float-right" id="sisterskid"> Add Child</a>
-                                    </fieldset>
-                                </div>
-                
-                            </div>
                          </fieldset>
+        
+                         <!-- *********************************** Parternal uncle details ends ^********************************************* -->
+        
+                         <fieldset class="border p-3">
+        
+                            
+                        
+                        
+                            <div id="paternalauntdetails">
+                                <div class="paternalauntwrapper">
+                                <div class="paternalaunt">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="paternalaunt">Paternal Aunt's Name</label>
+                                            <input type="text" class="form-control" name="paternalauntname">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="paternalauntage">Age</label>
+                                            <input type="date" class="form-control" name="paternalauntage">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="paternalauntphone">Phone</label>
+                                            <input type="phone" class="form-control" name="paternalauntphone">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="paternalauntoccupation">Occupation</label>
+                                            <input type="text" class="form-control" name="paternalauntoccupation">
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+                                        <input class="paternalauntmarried" type="checkbox" >
+                                        <label for="checkbox1">
+                                            Is She Married?
+                                        </label>
+                                    </div>
+                                </div>
+                               
+                                <div class="paternalauntfamily" style="display: none;">
+                                    <div class="paternalauntspouse">
+                                        <fieldset class="border p-3">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="paternalauntspousename">Spouse Name</label>
+                                                    <input type="text" class="form-control" name="paternalauntspousename">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="paternalauntspouseage">Age</label>
+                                                    <input type="text" class="form-control" name="paternalauntspouseage">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="paternalauntspousephone">Phone</label>
+                                                    <input type="phone" class="form-control" name="paternalauntspousephone">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="paternalauntspuosefather">Daughter Of</label>
+                                                    <input type="text" class="form-control" name="paternalauntspousefather">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="paternalauntspouseaddress">Address</label>
+                                                    <input type="text" class="form-control" name="paternalauntspouseaddress">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="paternalauntspoueoccupation">Occupation</label>
+                                                    <input type="text" class="form-control" name="paternalauntspousefatheroccupation">
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    
+                                    
+                                        <fieldset class="border p-3">
+                                            <div id="paternalauntkids">
+                                            <div class="paternalauntkidwrapper">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-5">
+                                                        <label for="sisterskid">Son/Daughter</label>
+                                                        <input type="text" class="form-control" name="paternalauntkid">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="sisterskidoccupation">Occupation</label>
+                                                        <input type="text" class="form-control" name="paternalauntkidoccupation">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="sisterskidage">Age</label>
+                                                        <input type="text" class="form-control" name="paternalauntkidage">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="sisterskidphone">Phone</label>
+                                                        <input type="phone" class="form-control" name="paternalauntkidphone">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="sisterskidschool">School</label>
+                                                        <input type="text" class="form-control" name="paternalauntkidschool" placeholder="School.">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="sisterskidcollege">College</label>
+                                                        <input type="text" class="form-control" name="paternalauntkidcollege" placeholder="college">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="morepaternalauntkids"></div>
+                                            <a class="btn btn-sm btn-danger float-right addpaternalauntkid"> Add Child</a>
+                                        </fieldset>
+                                    
+                                </div>
+                            </div>
+                            </div>
+                            <div class="morepaternalaunts"></div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <a class="btn btn-sm btn-danger float-right addpaternalaunt" > Add Paternal Aunt</a>
+                                    </div>
+                                </div>
+                         </fieldset>
+        
+                         <!-- *********************************** Parternal aunt details ends ^********************************************* -->
+        
+                        <fieldset class="border p-3">
+        
+                                                    
+                                                
+                                                
+                            <div id="maternaluncledetails">
+                                <div class="maternalunclewrapper">
+                                <div class="maternaluncle">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="maternaluncle">Maternal Uncle Name</label>
+                                            <input type="text" class="form-control" name="maternalunclename">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="maternaluncleage">Age</label>
+                                            <input type="date" class="form-control" name="maternaluncleage">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="maternalunclephone">Phone</label>
+                                            <input type="phone" class="form-control" name="maternalunclephone">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="maternaluncleoccupation">Occupation</label>
+                                            <input type="text" class="form-control" name="maternaluncleoccupation">
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+                                        <input class="maternalunclemarried" type="checkbox" >
+                                        <label for="checkbox1">
+                                            Is He Married?
+                                        </label>
+                                    </div>
+                                </div>
+                            
+                                <div class="maternalunclefamily" style="display: none;">
+                                    <div class="maternalunclespouse">
+                                        <fieldset class="border p-3">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="maternalunclespousename">Spouse Name</label>
+                                                    <input type="text" class="form-control" name="maternalunclespousename">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="maternalunclespouseage">Age</label>
+                                                    <input type="text" class="form-control" name="maternalunclespouseage">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="maternalunclespousephone">Phone</label>
+                                                    <input type="phone" class="form-control" name="maternalunclespousephone">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="maternalunclespuosefather">Daughter Of</label>
+                                                    <input type="text" class="form-control" name="maternalunclespousefather">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="maternalunclespouseaddress">Address</label>
+                                                    <input type="text" class="form-control" name="maternalunclespouseaddress">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="maternalunclespoueoccupation">Occupation</label>
+                                                    <input type="text" class="form-control" name="maternalunclespousefatheroccupation">
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    
+                                    
+                                        <fieldset class="border p-3">
+                                            <div id="maternalunclekids">
+                                            <div class="maternalunclekidwrapper">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-5">
+                                                        <label for="sisterskid">Son/Daughter</label>
+                                                        <input type="text" class="form-control" name="maternalunclekid">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="sisterskidoccupation">Occupation</label>
+                                                        <input type="text" class="form-control" name="maternalunclekidoccupation">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="sisterskidage">Age</label>
+                                                        <input type="text" class="form-control" name="maternalunclekidage">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="sisterskidphone">Phone</label>
+                                                        <input type="phone" class="form-control" name="maternalunclekidphone">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="sisterskidschool">School</label>
+                                                        <input type="text" class="form-control" name="maternalunclekidschool" placeholder="School.">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="sisterskidcollege">College</label>
+                                                        <input type="text" class="form-control" name="maternalunclekidcollege" placeholder="college">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="morematernalunclekids"></div>
+                                            <a class="btn btn-sm btn-danger float-right addmaternalunclekid"> Add Child</a>
+                                        </fieldset>
+                                    
+                                </div>
+                            </div>
+                            </div>
+                            <div class="morematernaluncles"></div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <a class="btn btn-sm btn-danger float-right addmaternaluncle" > Add Maternal Uncle</a>
+                                    </div>
+                                </div>
+                        </fieldset>
+                        <!-- *********************************** Maaternal Uncle details ends ^********************************************* -->
+        
+                        <fieldset class="border p-3">
+        
+                                                    
+                                                
+                                                
+                            <div id="maternalauntdetails">
+                                <div class="maternalauntwrapper">
+                                <div class="maternalaunt">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="maternalaunt">Maternal Aunt Name</label>
+                                            <input type="text" class="form-control" name="maternalauntname">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="maternalauntage">Age</label>
+                                            <input type="date" class="form-control" name="maternalauntage">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="maternalauntphone">Phone</label>
+                                            <input type="phone" class="form-control" name="maternalauntphone">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="maternalauntoccupation">Occupation</label>
+                                            <input type="text" class="form-control" name="maternalauntoccupation">
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+                                        <input class="maternalauntmarried" type="checkbox" >
+                                        <label for="checkbox1">
+                                            Is She Married?
+                                        </label>
+                                    </div>
+                                </div>
+                            
+                                <div class="maternalauntfamily" style="display: none;">
+                                    <div class="maternalauntspouse">
+                                        <fieldset class="border p-3">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="maternalauntspousename">Spouse Name</label>
+                                                    <input type="text" class="form-control" name="maternalauntspousename">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="maternalauntspouseage">Age</label>
+                                                    <input type="text" class="form-control" name="maternalauntspouseage">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="maternalauntspousephone">Phone</label>
+                                                    <input type="phone" class="form-control" name="maternalauntspousephone">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="maternalauntspuosefather">Daughter Of</label>
+                                                    <input type="text" class="form-control" name="maternalauntspousefather">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="maternalauntspouseaddress">Address</label>
+                                                    <input type="text" class="form-control" name="maternalauntspouseaddress">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="maternalauntspoueoccupation">Occupation</label>
+                                                    <input type="text" class="form-control" name="maternalauntspousefatheroccupation">
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    
+                                    
+                                        <fieldset class="border p-3">
+                                            <div id="maternalauntkids">
+                                            <div class="maternalauntkidwrapper">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-5">
+                                                        <label for="sisterskid">Son/Daughter</label>
+                                                        <input type="text" class="form-control" name="maternalauntkid">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="sisterskidoccupation">Occupation</label>
+                                                        <input type="text" class="form-control" name="maternalauntkidoccupation">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="sisterskidage">Age</label>
+                                                        <input type="text" class="form-control" name="maternalauntkidage">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="sisterskidphone">Phone</label>
+                                                        <input type="phone" class="form-control" name="maternalauntkidphone">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="sisterskidschool">School</label>
+                                                        <input type="text" class="form-control" name="maternalauntkidschool" placeholder="School.">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="sisterskidcollege">College</label>
+                                                        <input type="text" class="form-control" name="maternalauntkidcollege" placeholder="college">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="morematernalauntkids"></div>
+                                            <a class="btn btn-sm btn-danger float-right addmaternalauntkid"> Add Child</a>
+                                        </fieldset>
+                                    
+                                </div>
+                            </div>
+                            </div>
+                            <div class="morematernalaunts"></div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <a class="btn btn-sm btn-danger float-right addmaternalaunt" > Add Maternal Aunt</a>
+                                    </div>
+                                </div>
+                        </fieldset>
+                         <!-- *********************************** MaaternalAunt details ends ^********************************************* -->
+            </fieldset>
+        </section>
+
+        <section>
+            <fieldset class="border">
+                <legend class="w-auto">More Details</legend>
+                <div class="militant">
+                    <!-- <div class="checkbox checkbox-danger">
+                        <input id="ismilitant" name="militant" value="militant" type="checkbox">
+                        <label for="ismilitant">
+                            Is Militant?
+                        </label>
+                    </div> -->
+                    <div class="radio radio-danger radio-inline">
+                        <input type="radio" name="militant" id="radio3" value="1">
+                        <label for="radio3">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="radio radio-danger radio-inline">
+                        <input type="radio" name="militant" id="radio4" value="0" checked>
+                        <label for="radio4">
+                            No
+                        </label>
+                    </div>
+                    <div class="militantwrapper">
+                        
+                    </div>
+                </div>            
+            </fieldset>
+
+            <fieldset class="border p-3">
+                <legend class="w-auto">Detention</legend>
+                <div class="detentionplace">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="detentionhistory">Detention History</label>
+                            <textarea class="form-control" rows="4" id="detentionhistory" name="detentionhistory" placeholder="Detention History..."></textarea>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="school">Detention Place</label>
+                            <input type="text" name="place" class="form-control" id="place">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="prision">Prision</label>
+                            <input type="text" name="Prision" class="form-control" id="prision">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="ddate">Date</label>
+                            <input type="date" name="detentiondate" class="form-control" id="ddate">
+                        </div>
+                    </div>
+                </div>            
+            </fieldset>
+
+            <fieldset class="border">
+                <legend class="w-auto">Interrogator's Opnions</legend>
+                <div class="opnions">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="interrogatorname">Nmae</label>
+                            <input type="text" name="interrogatorname" class="form-control" id="interrogatorname" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="interrogatiornplace">Place</label>
+                            <input type="text" name="interrogationplace" class="form-control" id="interrogationplace" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="interrogationdate">Date</label>
+                            <input type="date" name="interrogationdate" class="form-control" id="interrogationdate" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="iopnion">Opnions</label>
+                            <textarea class="form-control" rows="4" id="iopnion" name="iopnion" placeholder="Interrogator's Opnions..."></textarea>
+                        </div>
+                    </div>
+                </div>            
             </fieldset>
         </section>
 
@@ -551,6 +1144,651 @@
   </div>
 
 </form>
+<div id="brotherdetails1" class="bd_sample" style="display: none;">
+    <div class="brothers">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="brother">Brother's Name</label>
+                <input type="text" name="brother" class="form-control" id="brother">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="brotherage">Age</label>
+                <input type="date" name="brotherage" class="form-control" id="brotherage">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="brotherphone">Phone</label>
+                <input type="phone" name="brotherphone" class="form-control" id="brotherphone">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="brotheroccupation">Occupation</label>
+                <input type="text" name="brotheroccupation" class="form-control" id="brotheroccupation">
+            </div>
+        </div>
+
+        <div class="brothersfamilydetails">
+            <div>
+                <input class="fl brothermarried" name="brothermarried"  style="width: 20px; margin-bottom: 0 !important;" type="checkbox" >
+                <label class="" for="fl">is married</label>
+                <a class="btn btn-sm btn-danger removebrother" style="margin: 5px; float: right;">Remove</a>
+            </div>
+            <div class="brothersfamily" style="display:none">
+                <div class="brotherspouse">
+                    <fieldset class="border p-3">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="brotherswifename">Spouse Name</label>
+                                <input type="text" name="brotherswifename" class="form-control">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="brotherswifeage">Age</label>
+                                <input type="text" name="brotherswifeage" class="form-control">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="brotherswifephone">Phone</label>
+                                <input type="phone" name="brotherswifephone" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="brotherswifefather">Daughter Of</label>
+                                <input type="text" name="brotherswifefather" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="brotherswifeaddress">Address</label>
+                                <input type="text" name="brotherswifeaddress" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="brotherswifeoccupation">Occupation</label>
+                                <input type="text" name="brotherswifeoccupation" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <div class="brotherkids">
+                    <fieldset class="border p-3">
+                        <div id="brotherkid">
+                            <div class="brotherkidwrapper">
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                        <label for="brotherskid">Son/Daughter</label>
+                                        <input type="text" name="brotherskid" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="kidoccupation">Occupation</label>
+                                        <input type="text" name="brotherskidoccupation" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="brotherskidage">Age</label>
+                                        <input type="text" name="brotherskidage" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="brotherskidphone">Phone</label>
+                                        <input type="phone" name="brotherskidphone" class="form-control">
+                                    </div>
+                                </div>
+                
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="brotherskidschool">School</label>
+                                        <input type="text" name="brotherskidschool" class="form-control" placeholder="School.">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="brotherskidcollege">College</label>
+                                        <input type="text" name="brotherskidcollege" class="form-control" placeholder="college">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <a class="btn btn-sm btn-danger removebrotherkid" style="margin: 5px; float: right;">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bmorekids"></div>
+                        <a class="btn btn-sm btn-danger float-right brotherchildadd"> Add Child</a>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sisterdetails1" style="display: none;">
+    <div class="sisterwrapper">
+    <div class="sisters">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="sister">Sister's Name</label>
+                <input type="text" class="form-control" name="sister">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="sisterage">Age</label>
+                <input type="date" class="form-control" name="sisterage">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="sisterphone">Phone</label>
+                <input type="phone" class="form-control" name="sisterphone">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="sisteroccupation">Occupation</label>
+                <input type="text" class="form-control" name="sisteroccupation">
+            </div>
+        </div>
+    
+        
+        <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+            <input class="sistermarried" type="checkbox" >
+            <label for="checkbox1">
+                is she married
+            </label>
+        </div>
+    
+
+    </div>
+   
+    <div class="sisterfamily" style="display: none;">
+        <div class="sisterspouse">
+            <fieldset class="border p-3">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="sistersspousename">Spouse Name</label>
+                        <input type="text" class="form-control"name="sistersspousename">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="sistersspousage">Age</label>
+                        <input type="text" class="form-control" name="sistersspousage">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="sistersspousephone">Phone</label>
+                        <input type="phone" class="form-control" name="sistersspousphone">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="sisterspuosefather">Son Of</label>
+                        <input type="text" class="form-control" name="sisterspousefather">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="sistersspouseaddress">Address</label>
+                        <input type="text" class="form-control" name="sisterswifeaddress">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="sistersspouseoccupation">Occupation</label>
+                        <input type="text" class="form-control" name="sisterspouseoccupation">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+        
+            <fieldset class="border p-3">
+                <div id="sisterkids">
+                <div class="sisterkidwrapper">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="sisterskid">Son/Daughter</label>
+                            <input type="text" class="form-control" name="sisterkid">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="sisterskidoccupation">Occupation</label>
+                            <input type="text" class="form-control" name="sisterskidoccupation">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidage">Age</label>
+                            <input type="text" class="form-control" name="sistersskidage">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidphone">Phone</label>
+                            <input type="phone" class="form-control" name="sistersskidphone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidschool">School</label>
+                            <input type="text" class="form-control" name="sisterskidschool" placeholder="School.">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidcollege">College</label>
+                            <input type="text" class="form-control" name="sisterskidcollege" placeholder="college">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="moresisterkids"></div>
+                <a class="btn btn-sm btn-danger float-right addsisterskid"> Add Child</a>
+            </fieldset>
+        
+    </div>
+</div>
+</div>
+
+<div id="paternaluncledetails1" style="display: none;">
+    <div class="paternalunclewrapper">
+    <div class="paternaluncle">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="paternaluncle">Paternal Uncle's Name</label>
+                <input type="text" class="form-control" name="paternaluncle">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="paternaluncleage">Age</label>
+                <input type="date" class="form-control" name="paternaluncleage">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="paternalunclephone">Phone</label>
+                <input type="phone" class="form-control" name="paternalunclephone">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="paternaluncleoccupation">Occupation</label>
+                <input type="text" class="form-control" name="paternaluncleoccupation">
+            </div>
+        </div>
+    
+        
+        <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+            <input class="paternalunclemarried" type="checkbox" >
+            <label for="checkbox1">
+                Is He Married?
+            </label>
+        </div>
+    </div>
+   
+    <div class="paternalunclefamily" style="display: none;">
+        <div class="paternalunclespouse">
+            <fieldset class="border p-3">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="paternalunclespousename">Spouse Name</label>
+                        <input type="text" class="form-control" name="paternalunclespousename">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="paternalunclespouseage">Age</label>
+                        <input type="text class="form-control" name="paternalunclespouseage">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="paternalunclespousephone">Phone</label>
+                        <input type="phone" class="form-control" name="paternalunclespousephone">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="paternalunclespuosefather">Daughter Of</label>
+                        <input type="text" class="form-control" name="paternalunclespousefather">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="paternalunclespouseaddress">Address</label>
+                        <input type="text" class="form-control" name="paternalunclespouseaddress">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="paternalunclespoueoccupation">Occupation</label>
+                        <input type="text" class="form-control" name="paternalunclespousefatheroccupation">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+        
+            <fieldset class="border p-3">
+                <div id="paternalunclekids">
+                <div class="paternalunclekidwrapper">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="sisterskid">Son/Daughter</label>
+                            <input type="text" class="form-control" name="paternalunclekid">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="sisterskidoccupation">Occupation</label>
+                            <input type="text" class="form-control" name="paternalunclekidoccupation">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidage">Age</label>
+                            <input type="text" class="form-control" name="paternalunclekidage">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidphone">Phone</label>
+                            <input type="phone" class="form-control" name="paternalunclekidphone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidschool">School</label>
+                            <input type="text" class="form-control" name="paternalunclekidschool" placeholder="School.">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidcollege">College</label>
+                            <input type="text" class="form-control" name="paternalunclekidcollege" placeholder="college">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="morepaternalunclekids"></div>
+                <a class="btn btn-sm btn-danger float-right addpaternalunclekid"> Add Child</a>
+            </fieldset>
+        
+    </div>
+</div>
+</div>
+
+<div id="paternalauntdetails1" style="display: none;">
+    <div class="paternalauntwrapper">
+    <div class="paternalaunt">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="paternalaunt">Paternal Aunt's Name</label>
+                <input type="text" class="form-control" name="paternalaunt">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="paternalauntage">Age</label>
+                <input type="date" class="form-control" name="paternalauntage">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="paternalauntphone">Phone</label>
+                <input type="phone" class="form-control" name="paternalauntphone">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="paternalauntoccupation">Occupation</label>
+                <input type="text" class="form-control" name="paternalauntoccupation">
+            </div>
+        </div>
+    
+        
+        <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+            <input class="paternalauntmarried" type="checkbox" >
+            <label for="checkbox1">
+                Is She Married?
+            </label>
+        </div>
+    </div>
+   
+    <div class="paternalauntfamily" style="display: none;">
+        <div class="paternalauntpouse">
+            <fieldset class="border p-3">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="paternalauntpousename">Spouse Name</label>
+                        <input type="text" class="form-control" name="paternalauntpousename">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="paternalauntpouseage">Age</label>
+                        <input type="text" class="form-control" name="paternalauntpouseage">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="paternalauntpousephone">Phone</label>
+                        <input type="phone" class="form-control" name="paternalauntpousephone">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="paternalauntpuosefather">Daughter Of</label>
+                        <input type="text" class="form-control" name="paternalauntpousefather">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="paternalauntpouseaddress">Address</label>
+                        <input type="text" class="form-control" name="paternalauntpouseaddress">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="paternalauntpoueoccupation">Occupation</label>
+                        <input type="text" class="form-control" name="paternalauntpousefatheroccupation">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+        
+            <fieldset class="border p-3">
+                <div id="paternalauntkids">
+                <div class="paternalauntkidwrapper">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="sisterskid">Son/Daughter</label>
+                            <input type="text" class="form-control" name="paternalauntkid">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="sisterskidoccupation">Occupation</label>
+                            <input type="text" class="form-control" name="paternalauntkidoccupation">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidage">Age</label>
+                            <input type="text" class="form-control" name="paternalauntkidage">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidphone">Phone</label>
+                            <input type="phone" class="form-control" name="paternalauntkidphone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidschool">School</label>
+                            <input type="text" class="form-control" name="paternalauntkidschool" placeholder="School.">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidcollege">College</label>
+                            <input type="text" class="form-control" name="paternalauntkidcollege" placeholder="college">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="morepaternalauntkids"></div>
+                <a class="btn btn-sm btn-danger float-right addpaternalauntkid"> Add Child</a>
+            </fieldset>
+        
+    </div>
+</div>
+</div>
+
+<div id="maternaluncledetails1" style="display: none;">
+    <div class="maternalunclewrapper">
+    <div class="maternaluncle">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="maternaluncle">Maternal Uncle Name</label>
+                <input type="text" class="form-control" name="maternaluncle">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="maternaluncleage">Age</label>
+                <input type="date" class="form-control" name="maternaluncleage">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="maternalunclephone">Phone</label>
+                <input type="phone" class="form-control" name="maternalunclephone">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="maternaluncleoccupation">Occupation</label>
+                <input type="text" class="form-control" name="maternaluncleoccupation">
+            </div>
+        </div>
+    
+        
+        <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+            <input class="maternalunclemarried" type="checkbox" >
+            <label for="checkbox1">
+                Is He Married?
+            </label>
+        </div>
+    </div>
+   
+    <div class="maternalunclefamily" style="display: none;">
+        <div class="maternalunclepouse">
+            <fieldset class="border p-3">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="maternalunclepousename">Spouse Name</label>
+                        <input type="text" class="form-control" name="maternalunclepousename">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="maternalunclepouseage">Age</label>
+                        <input type="text" class="form-control" name="maternalunclepouseage">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="maternalunclepousephone">Phone</label>
+                        <input type="phone" class="form-control" name="maternalunclepousephone">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="maternalunclepuosefather">Daughter Of</label>
+                        <input type="text" class="form-control" name="maternalunclepousefather">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="maternalunclepouseaddress">Address</label>
+                        <input type="text" class="form-control" name="maternalunclepouseaddress">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="maternalunclepoueoccupation">Occupation</label>
+                        <input type="text" class="form-control" name="maternalunclepousefatheroccupation">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+        
+            <fieldset class="border p-3">
+                <div id="maternalunclekids">
+                <div class="maternalunclekidwrapper">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="sisterskid">Son/Daughter</label>
+                            <input type="text" class="form-control" name="maternalunclekid">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="sisterskidoccupation">Occupation</label>
+                            <input type="text" class="form-control" name="maternalunclekidoccupation">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidage">Age</label>
+                            <input type="text" class="form-control" name="maternalunclekidage">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidphone">Phone</label>
+                            <input type="phone" class="form-control" name="maternalunclekidphone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidschool">School</label>
+                            <input type="text" class="form-control" name="maternalunclekidschool" placeholder="School.">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidcollege">College</label>
+                            <input type="text" class="form-control" name="maternalunclekidcollege" placeholder="college">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="morematernalunclekids"></div>
+                <a class="btn btn-sm btn-danger float-right addmaternalunclekid"> Add Child</a>
+            </fieldset>
+        
+    </div>
+</div>
+</div>
+
+<div id="maternalauntdetails1" style="display: none;">
+    <div class="maternalauntwrapper">
+    <div class="maternalaunt">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="maternalaunt">Maternal Aunt Name</label>
+                <input type="text" class="form-control" name="maternalaunt">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="maternalauntage">Age</label>
+                <input type="date" class="form-control" name="maternalauntage">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="maternalauntphone">Phone</label>
+                <input type="phone" class="form-control" name="maternalauntphone">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="maternalauntoccupation">Occupation</label>
+                <input type="text" class="form-control" name="maternalauntoccupation">
+            </div>
+        </div>
+    
+        
+        <div class="col-md-12 checkbox checkbox-warning" style="margin-left: 20px;">
+            <input class="maternalauntmarried" type="checkbox" >
+            <label for="checkbox1">
+                Is She Married?
+            </label>
+        </div>
+    </div>
+   
+    <div class="maternalauntfamily" style="display: none;">
+        <div class="maternalauntpouse">
+            <fieldset class="border p-3">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="maternalauntpousename">Spouse Name</label>
+                        <input type="text" class="form-control" name="maternalauntpousename">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="maternalauntpouseage">Age</label>
+                        <input type="text" class="form-control" name="maternalauntpouseage">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="maternalauntpousephone">Phone</label>
+                        <input type="phone" class="form-control" name="maternalauntpousephone">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="maternalauntpuosefather">Daughter Of</label>
+                        <input type="text" class="form-control" name="maternalauntpousefather">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="maternalauntpouseaddress">Address</label>
+                        <input type="text" class="form-control" name="maternalauntpouseaddress">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="maternalauntpoueoccupation">Occupation</label>
+                        <input type="text" class="form-control" name="maternalauntpousefatheroccupation">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+        
+            <fieldset class="border p-3">
+                <div id="maternalauntkids">
+                <div class="maternalauntkidwrapper">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="sisterskid">Son/Daughter</label>
+                            <input type="text" class="form-control" name="maternalauntkid">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="sisterskidoccupation">Occupation</label>
+                            <input type="text" class="form-control" name="maternalauntkidoccupation">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidage">Age</label>
+                            <input type="text" class="form-control" name="maternalauntkidage">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sisterskidphone">Phone</label>
+                            <input type="phone" class="form-control" name="maternalauntkidphone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidschool">School</label>
+                            <input type="text" class="form-control" name="maternalauntkidschool" placeholder="School.">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sisterskidcollege">College</label>
+                            <input type="text" class="form-control" name="maternalauntkidcollege" placeholder="college">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="morematernalauntkids"></div>
+                <a class="btn btn-sm btn-danger float-right addmaternalauntkid"> Add Child</a>
+            </fieldset>
+        
+    </div>
+</div>
+</div>
+
 </div>
 
 
@@ -579,7 +1817,7 @@
             data: form.serialize(), // serializes the form's elements.
             success: function()
             {
-                alert("data sent successfully"); // show response from the php script.
+                alert("data sent successfully"); // show response 
             }
             });  
     })
@@ -604,6 +1842,121 @@
     $(document).on('click','.removebrotherkid',function(){
         $(this).parent().parent().parent().remove();
     })
+
+    //sisters
+    $(document).on('click','.sistermarried',function(){
+        if( $(this).prop('checked')){
+            $(this).parent().parent().parent().find('.sisterfamily').show()
+        }else{
+            $(this).parent().parent().parent().find('.sisterfamily').hide()
+        }
+
+    })
+
+    $(document).on('click','.addsisterskid',function(){
+        
+        let kidclone = $('#sisterdetails1 #sisterkids .sisterkidwrapper').clone();
+        $(this).parent().parent().find('.moresisterkids').append(kidclone)
+    })
+
+    $(document).on('click','.addsister',function(){
+        let clonesister = $('#sisterdetails1 .sisterwrapper').clone().find("input").val("").end();
+        // clonesister.find("input:checkbox").attr("id","checkbox"+i)
+        $('.moresisters').append(clonesister)
+    })
+    //sister end
+
+    //paternal uncle
+    $(document).on('click','.paternalunclemarried',function(){
+        if( $(this).prop('checked')){
+            $(this).parent().parent().parent().find('.paternalunclefamily').show()
+        }else{
+            $(this).parent().parent().parent().find('.paternalunclefamily').hide()
+        }
+
+    })
+
+    $(document).on('click','.addpaternalunclekid',function(){
+        
+        let kidclone = $('#paternaluncledetails1 #paternalunclekids .paternalunclekidwrapper').clone();
+        $(this).parent().parent().find('.morepaternalunclekids').append(kidclone)
+    })
+
+    $(document).on('click','.addpaternaluncle',function(){
+        let clonepaternaluncle = $('#paternaluncledetails1 .paternalunclewrapper').clone().find("input").val("").end();
+        // clonesister.find("input:checkbox").attr("id","checkbox"+i)
+        $('.morepaternaluncles').append(clonepaternaluncle)
+    })
+    //paternal uncle ends
+
+    //paternal aunt
+    $(document).on('click','.paternalauntmarried',function(){
+        if( $(this).prop('checked')){
+            $(this).parent().parent().parent().find('.paternalauntfamily').show()
+        }else{
+            $(this).parent().parent().parent().find('.paternalauntfamily').hide()
+        }
+
+    })
+
+    $(document).on('click','.addpaternalauntkid',function(){
+        
+        let kidclone = $('#paternalauntdetails1 #paternalauntkids .paternalauntkidwrapper').clone();
+        $(this).parent().parent().find('.morepaternalauntkids').append(kidclone)
+    })
+
+    $(document).on('click','.addpaternalaunt',function(){
+        let clonepaternalaunt = $('#paternalauntdetails1 .paternalauntwrapper').clone().find("input").val("").end();
+        // clonesister.find("input:checkbox").attr("id","checkbox"+i)
+        $('.morepaternalaunts').append(clonepaternalaunt)
+    })
+    //paternal aunt ends
+
+    //maternaluncle
+    $(document).on('click','.maternalunclemarried',function(){
+        if( $(this).prop('checked')){
+            $(this).parent().parent().parent().find('.maternalunclefamily').show()
+        }else{
+            $(this).parent().parent().parent().find('.maternalunclefamily').hide()
+        }
+
+    })
+
+    $(document).on('click','.addmaternalunclekid',function(){
+        
+        let kidclone = $('#maternaluncledetails1 #maternalunclekids .maternalunclekidwrapper').clone();
+        $(this).parent().parent().find('.morematernalunclekids').append(kidclone)
+    })
+
+    $(document).on('click','.addmaternaluncle',function(){
+        let clonematernaluncle = $('#maternaluncledetails1 .maternalunclewrapper').clone().find("input").val("").end();
+        // clonesister.find("input:checkbox").attr("id","checkbox"+i)
+        $('.morematernaluncles').append(clonematernaluncle)
+    })
+    //maternaluncle ends
+
+    //maternalaunt
+    $(document).on('click','.maternalauntmarried',function(){
+        if( $(this).prop('checked')){
+            $(this).parent().parent().parent().find('.maternalauntfamily').show()
+        }else{
+            $(this).parent().parent().parent().find('.maternalauntfamily').hide()
+        }
+
+    })
+
+    $(document).on('click','.addmaternalauntkid',function(){
+        
+        let kidclone = $('#maternalauntdetails1 #maternalauntkids .maternalauntkidwrapper').clone();
+        $(this).parent().parent().find('.morematernalauntkids').append(kidclone)
+    })
+
+    $(document).on('click','.addmaternalaunt',function(){
+        let clonematernalaunt = $('#maternalauntdetails1 .maternalauntwrapper').clone().find("input").val("").end();
+        // clonesister.find("input:checkbox").attr("id","checkbox"+i)
+        $('.morematernalaunts').append(clonematernalaunt)
+    })
+    //maternalaunt ends
 
     function criminalismarried(){
         var html=`<div class="marriagedetails">
@@ -692,9 +2045,6 @@
     })
     
 
-    
-        
-   
 
     function addchild(){
         var html =`     <div class="dfield">
@@ -749,7 +2099,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="vehicaltype">Type</label>
-                    <select class="form-control" id="vehicaltype">
+                    <select class="form-control" id="vehicaltype" name='vehicaltype'>
                     <option value="car">Car</option>
                     <option value="bike">Bike</option>
                     <option value="other">Other</option>
@@ -761,6 +2111,58 @@
                 </div>`
         $('.mobility').append(html);
     }
+
+    
+    $('input:radio[name="militant"]').change(
+    function(){
+        var html=`<div class="form-row">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="outfit">Organization/Outfit</label>
+            <input type="text" name="outfit" class="form-control" id="outfit">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="rank">Rank</label>
+            <input type="text" name="rank" class="form-control" id="rank">
+        </div>
+        
+    </div>
+        <div class="form-group col-md-12">
+            <label for="militancy">Militancy</label>
+            <textarea class="form-control" rows="4" id="militancy" name="militancydetails" placeholder="How/By/When/Where..."></textarea>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="infiltration">Infiltration Details</label>
+            <textarea class="form-control" rows="4" id="infiltration" name="infiltrationdetails" placeholder="Route/Guide/Group/etc..."></textarea>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="areas">Areas of Concentration</label>
+            <textarea class="form-control" rows="4" id="areas" name="areasofconcentration" placeholder="Areas/etc..."></textarea>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="sympathizers">Sympathizers/Harbourer's</label>
+            <textarea class="form-control" rows="4" id="sympathizers" name="sympathizers" placeholder="People who proviede support etc..."></textarea>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="arrest">Details of Arrest</label>
+            <textarea class="form-control" rows="4" id="arrest" name="detailsofarrest" placeholder="Full details of Arrest..."></textarea>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="recoveries">Recoveries</label>
+            <textarea class="form-control" rows="4" id="recoveries" name="recoveries" placeholder="Full details Recovries..."></textarea>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="associates">Associates</label>
+            <textarea class="form-control" rows="4" id="associates" name="associates" placeholder="Associate/Relations Details..."></textarea>
+        </div>
+    </div>
+`
+        if ($(this).is(':checked') && $(this).val() == '1') {
+            $(this).parent().parent().find('.militantwrapper').append(html);
+        }else{
+            $(this).parent().parent().find('.militantwrapper').children().remove();
+        }
+    });
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {% endblock body %}
